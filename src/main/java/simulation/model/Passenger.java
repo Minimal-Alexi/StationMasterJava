@@ -29,7 +29,7 @@ public class Passenger {
         return this.departureTime-this.arrivalTime;
     }
     public int getServiceTime(){
-        return this.serviceEntryTime-this.serviceExitTime;
+        return this.serviceExitTime - this.serviceEntryTime;
     }
 
 }

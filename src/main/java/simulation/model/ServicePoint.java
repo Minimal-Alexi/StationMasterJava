@@ -29,7 +29,7 @@ public class ServicePoint {
         passenger.setServiceEntryTime(clock.getTime());
         queue.add(passenger);
     }
-    public void servePassenger(Clock clock){
+    public Passenger servePassenger(Clock clock){
         Passenger passenger = queue.remove(0);
         if(nextPoints.isEmpty()){
             passenger.setServiceExitTime(clock.getTime());
@@ -40,6 +40,7 @@ public class ServicePoint {
         }
         this.averageResponseTime += passenger.getServiceTime();
         this.servicedCustomers++;
+        return passenger;
     }
     public void generateResponseTime(){
         this.responseTime = rand.nextInt(maximumResponseTime-minimumResponseTime) + minimumResponseTime;
@@ -53,5 +54,8 @@ public class ServicePoint {
     public float getAverageResponseTime(){
         averageResponseTime /= servicedCustomers;
         return averageResponseTime;
+    }
+    public boolean isQueueEmpty(){
+        return queue.isEmpty();
     }
 }
