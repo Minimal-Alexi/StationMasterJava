@@ -50,4 +50,8 @@ public class ServicePoint {
     public int getResponseTime(){
         return responseTime;
     }
+    public float getAverageResponseTime(){
+        averageResponseTime /= servicedCustomers;
+        return averageResponseTime;
+    }
 }
