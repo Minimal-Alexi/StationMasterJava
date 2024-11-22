@@ -58,4 +58,7 @@ public class ServicePoint {
     public boolean isQueueEmpty(){
         return queue.isEmpty();
     }
+    public String getServiceName(){
+        return serviceName;
+    }
 }
