@@ -16,7 +16,7 @@ public class Clock {
     public long getTime(){
         return this.time;
     }
-    public void setTime(int time){
+    public void setTime(long time){
         this.time = time;
     }
 }

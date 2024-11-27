@@ -9,7 +9,6 @@ public abstract class Engine {
 
     public Engine() {
         eventList = new EventList();
-        // Service Points are created in the subclass
     }
 
     public void setSimulationTime(double simulationTime) {
