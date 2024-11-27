@@ -2,7 +2,7 @@ package simulation.framework;
 
 public class Clock {
     private static Clock instance;
-    private int time;
+    private long time;
     private Clock(){
         this.time = 0;
     }
@@ -13,7 +13,7 @@ public class Clock {
         }
         return instance;
     }
-    public int getTime(){
+    public long getTime(){
         return this.time;
     }
     public void setTime(int time){

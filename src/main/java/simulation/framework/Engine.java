@@ -21,7 +21,7 @@ public abstract class Engine {
 
         while (simulate()) {
             System.out.printf("\n%sA-phase:%s time is %.2f\n", RED, WHITE, currentTime());
-            Clock.getInstance().setClock(currentTime());
+            Clock.getInstance().setTime(currentTime());
 
             System.out.printf("%sB-phase:%s ", RED, WHITE);
             runBEvents();
@@ -34,15 +34,15 @@ public abstract class Engine {
     }
 
     private boolean simulate() {
-        return Clock.getInstance().getClock() < simulationTime;
+        return Clock.getInstance().getTime() < simulationTime;
     }
 
-    private double currentTime() {
+    private long currentTime() {
         return eventList.getNextEventTime();
     }
 
     private void runBEvents() {
-        while (eventList.getNextEventTime() == Clock.getInstance().getClock()) {
+        while (eventList.getNextEventTime() == Clock.getInstance().getTime()) {
             runEvent(eventList.remove());
         }
     }
