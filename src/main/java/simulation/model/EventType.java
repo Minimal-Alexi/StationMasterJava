@@ -1,6 +1,11 @@
 package simulation.model;
 
 public enum EventType {
-    b1CustomerArrival,b2TicketCheck,b3TrainFinish1,b4TrainFinish2,b5TrainFinish3,
-    c1CustomerSort,c2TicketCheckFinish,c3TrainArrival1,c4TrainArrival2,c5TrainArrival3,
+    B1_PASSENGER_ARRIVAL,
+    B2_TICKET_CHECK_FINISH,
+    B3_TRAIN1_DEPARTURE,B4_TRAIN2_DEPARTURE,B5_TRAIN3_DEPARTURE,
+    B6_TRAIN1_ARRIVAL,B7_TRAIN2_ARRIVAL,B8_TRAIN3_ARRIVAL,
+    C1_PASSENGER_TSORT,
+    C2_TICKET_CHECK_EMPTY,
+    C3_TRAIN_FULL,C4_TRAIN2_FULL,C5_TRAIN3_FULL,
 }
