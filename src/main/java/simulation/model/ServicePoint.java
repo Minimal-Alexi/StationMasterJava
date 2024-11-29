@@ -24,7 +24,6 @@ public class ServicePoint {
         this.generator = g;
         this.eventList = tl;
         this.eventTypeScheduled = type;
-
         this.serviceTimeSum = 0;
         this.customerServiced = 0;
 
@@ -59,6 +58,13 @@ public class ServicePoint {
 
     public boolean isOnQueue() {
         return queue.size() > 0;
+    }
+    public int getQueueSize() {
+        return queue.size();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getCustomerServiced() {
