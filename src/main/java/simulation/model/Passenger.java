@@ -2,7 +2,7 @@ package simulation.model;
 
 public class Passenger {
     private static int nr = 0;
-    private int id;
+    private final int id;
     private long arrivalTime;
     private long departureTime;
     private long serviceEntryTime;
