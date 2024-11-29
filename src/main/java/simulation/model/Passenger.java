@@ -12,8 +12,6 @@ public class Passenger {
     private final PassengerType type;
     private long arrivalTime;
     private long departureTime;
-    private long serviceEntryTime;
-    private long serviceExitTime;
     public Passenger() {
         this.id = nr++;
         this.arrivalTime = Clock.getInstance().getTime();
@@ -24,17 +22,8 @@ public class Passenger {
             this.type = PassengerType.Metro;
         }
     }
-    public void setArrivalTime(long arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-    public void setDepartureTime(long departureTime) {
-        this.departureTime = departureTime;
-    }
-    public void setServiceEntryTime(long serviceEntryTime) {
-        this.serviceEntryTime = serviceEntryTime;
-    }
-    public void setServiceExitTime(long serviceExitTime) {
-        this.serviceExitTime = serviceExitTime;
+    public void setDepartureTime() {
+        this.departureTime = Clock.getInstance().getTime();
     }
     public int getId(){
         return this.id;
@@ -44,9 +33,6 @@ public class Passenger {
     }
     public long getStationTime(){
         return this.departureTime-this.arrivalTime;
-    }
-    public long getServiceTime(){
-        return this.serviceExitTime - this.serviceEntryTime;
     }
     public static void main(String[] args){
         int metro = 0,train = 0;

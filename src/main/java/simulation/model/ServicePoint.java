@@ -8,16 +8,16 @@ import simulation.framework.EventList;
 import java.util.LinkedList;
 
 public class ServicePoint {
-    private static final String GREEN = "\033[0;32m";
-    private static final String WHITE = "\033[0;37m";
-    private LinkedList<Passenger> queue;
-    private ContinuousGenerator generator;
-    private EventList eventList;
-    private EventType eventTypeScheduled;
-    private String name;
-    private double serviceTimeSum;
-    private int customerServiced;
-    private boolean reserved = false;
+    protected static final String GREEN = "\033[0;32m";
+    protected static final String WHITE = "\033[0;37m";
+    protected LinkedList<Passenger> queue;
+    protected ContinuousGenerator generator;
+    protected EventList eventList;
+    protected EventType eventTypeScheduled;
+    protected String name;
+    protected double serviceTimeSum;
+    protected int customerServiced;
+    protected boolean reserved = false;
 
     public ServicePoint(String name, ContinuousGenerator g, EventList tl, EventType type) {
         this.name = name;
