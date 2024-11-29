@@ -49,6 +49,7 @@ public class ServicePoint {
 
         reserved = true;
         long serviceTime = (long) generator.sample();
+        this.serviceTimeSum += serviceTime;
         eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getTime() + serviceTime));
     }
 
@@ -72,6 +73,7 @@ public class ServicePoint {
     }
 
     public double getMeanServiceTime() {
+        if(customerServiced == 0) return -1;
         return serviceTimeSum / customerServiced;
     }
 

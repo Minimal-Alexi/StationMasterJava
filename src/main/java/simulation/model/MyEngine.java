@@ -5,6 +5,7 @@ import eduni.distributions.Normal;
 
 import simulation.framework.ArrivalProcess;
 import simulation.framework.Clock;
+import simulation.framework.SeedSingleton;
 import simulation.framework.Engine;
 import simulation.framework.Event;
 
@@ -15,7 +16,7 @@ public class MyEngine extends Engine {
     public MyEngine() {
         super();
         servicePoints = new ServicePoint[4];
-        servicePoints[0] = new ServicePoint("Ticket Check",new Normal(30,20),eventList,EventType.B2_TICKET_CHECK_FINISH);
+        servicePoints[0] = new ServicePoint("Ticket Check",new Normal(25,20),eventList,EventType.B2_TICKET_CHECK_FINISH);
         servicePoints[1] = new ServicePoint("Train Station 1",new Normal(240,600),eventList,EventType.B3_TRAIN1_DEPARTURE);
         servicePoints[2] = new ServicePoint("Train Station 2",new Normal(420,60),eventList,EventType.B4_TRAIN2_DEPARTURE);
         servicePoints[3] = new ServicePoint("Metro Station",new Normal(120,90),eventList,EventType.B5_TRAIN3_DEPARTURE);
@@ -48,6 +49,7 @@ public class MyEngine extends Engine {
                     servicePoints[3].addToQueue(passenger);
                 }
                 break;
+
         }
     }
 
@@ -62,7 +64,7 @@ public class MyEngine extends Engine {
     protected void results() {
         System.out.printf("\nSimulation ended at %d%n", Clock.getInstance().getTime());
         for(ServicePoint sp : servicePoints){
-            System.out.printf("Total passengers at %s: %d\n", sp.getName(),sp.getQueueSize());
+            System.out.printf("Total passengers at %s: %d\nTotal customers serviced: %d\nAverage service time: %.2f\n\n", sp.getName(),sp.getQueueSize(),sp.getCustomerServiced(),sp.getMeanServiceTime());
         }
     }
 }
