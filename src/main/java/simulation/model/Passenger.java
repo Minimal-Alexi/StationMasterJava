@@ -3,33 +3,33 @@ package simulation.model;
 public class Passenger {
     private static int nr = 0;
     private int id;
-    private int arrivalTime;
-    private int departureTime;
-    private int serviceEntryTime;
-    private int serviceExitTime;
-    public Passenger(int arrivalTime) {
+    private long arrivalTime;
+    private long departureTime;
+    private long serviceEntryTime;
+    private long serviceExitTime;
+    public Passenger(long arrivalTime) {
         this.id = nr++;
         this.arrivalTime = arrivalTime;
     }
-    public void setArrivalTime(int arrivalTime) {
+    public void setArrivalTime(long arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
-    public void setDepartureTime(int departureTime) {
+    public void setDepartureTime(long departureTime) {
         this.departureTime = departureTime;
     }
-    public void setServiceEntryTime(int serviceEntryTime) {
+    public void setServiceEntryTime(long serviceEntryTime) {
         this.serviceEntryTime = serviceEntryTime;
     }
-    public void setServiceExitTime(int serviceExitTime) {
+    public void setServiceExitTime(long serviceExitTime) {
         this.serviceExitTime = serviceExitTime;
     }
     public int getId(){
         return this.id;
     }
-    public int getStationTime(){
+    public long getStationTime(){
         return this.departureTime-this.arrivalTime;
     }
-    public int getServiceTime(){
+    public long getServiceTime(){
         return this.serviceExitTime - this.serviceEntryTime;
     }
 
