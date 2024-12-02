@@ -108,7 +108,7 @@ public class MyEngine extends Engine {
             System.out.printf("Total passengers at %s: %d\nTotal passengers serviced: %d\nAverage service time: %.2f\n\n", sp.getName(), sp.getQueueSize(), sp.getCustomerServiced(), sp.getMeanServiceTime());
         }
         for (TrainStation st : trainStations) {
-            System.out.printf("Total passengers at %s: %d\nTotal passengers serviced: %d\nAverage station wait time: %.2f\n"
+            System.out.printf("Total passengers at %s: %d\nTotal passengers serviced: %d\nAverage station load time: %.2f\n"
                     + "%d trains stopped at the station, with an average capacity of: %.2f \n\n", st.getName(), st.getQueueSize(),st.getCustomerServiced(), st.getMeanServiceTime(),st.getTotalTrains(),st.getMeanTrainCapacity());
         }
     }
