@@ -4,14 +4,14 @@ package simulation.framework;
 public abstract class Engine {
     private static final String RED = "\033[0;31m";
     private static final String WHITE = "\033[0;37m";
-    private double simulationTime = 0;
+    private long simulationTime = 0;
     protected EventList eventList;
 
     public Engine() {
         eventList = new EventList();
     }
 
-    public void setSimulationTime(double simulationTime) {
+    public void setSimulationTime(long simulationTime) {
         this.simulationTime = simulationTime;
     }
 
@@ -19,7 +19,7 @@ public abstract class Engine {
         initialize();
 
         while (simulate()) {
-            System.out.printf("\n%sA-phase:%s time is %.2f\n", RED, WHITE, currentTime());
+            System.out.printf("\n%sA-phase:%s time is %d%n\n", RED, WHITE, currentTime());
             Clock.getInstance().setTime(currentTime());
 
             System.out.printf("%sB-phase:%s ", RED, WHITE);
