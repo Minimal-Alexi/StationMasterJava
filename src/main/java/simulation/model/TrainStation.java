@@ -35,6 +35,7 @@ public class TrainStation extends ServicePoint{
         }
         reserved = false;
         if(!loadedPassengers.isEmpty()){
+            System.out.printf("%sTrain leaved from %s. The train loaded %d passengers, leaving the station with : %d passengers. %s",ServicePoint.GREEN,super.name,loadedPassengers.size(),queue.size(),ServicePoint.WHITE);
             return loadedPassengers;
         }
         return null;
