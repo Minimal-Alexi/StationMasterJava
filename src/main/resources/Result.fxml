@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml" >
+    <Label text="Simulation Results" style="-fx-font-size: 24px;"/>
+    <GridPane hgap="10" vgap="10">
+        <Label text="Total passengers at Train Station 1:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <Label fx:id="totalPassengersStation1" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+        <Label text="Total passengers serviced at Train Station 1:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+        <Label fx:id="totalServicedStation1" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+        <Label text="Average station load time at Train Station 1:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+        <Label fx:id="avgLoadTimeStation1" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+        <Label text="Total passengers at Train Station 2:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+        <Label fx:id="totalPassengersStation2" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+        <Label text="Total passengers serviced at Train Station 2:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+        <Label fx:id="totalServicedStation2" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+
+        <Label text="Average station load time at Train Station 2:" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+        <Label fx:id="avgLoadTimeStation2" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+
+        <Label text="Total passengers at Metro Station:" GridPane.rowIndex="12" GridPane.columnIndex="0"/>
+        <Label fx:id="totalPassengersMetro" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+
+        <Label text="Total passengers serviced at Metro Station:" GridPane.rowIndex="13" GridPane.columnIndex="0"/>
+        <Label fx:id="totalServicedMetro" GridPane.rowIndex="13" GridPane.columnIndex="1"/>
+
+        <Label text="Average station load time at Metro Station:" GridPane.rowIndex="14" GridPane.columnIndex="0"/>
+        <Label fx:id="avgLoadTimeMetro" GridPane.rowIndex="14" GridPane.columnIndex="1"/>
+    </GridPane>
+</VBox>

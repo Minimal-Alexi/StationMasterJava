@@ -133,4 +133,12 @@ public class MyEngine extends Engine {
             }
         }
     }
+
+    public ServicePoint[] getServicePoints() {
+        return servicePoints;
+    }
+
+    public TrainStation[] getTrainStations() {
+        return trainStations;
+    }
 }
