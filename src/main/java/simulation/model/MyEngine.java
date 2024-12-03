@@ -22,9 +22,9 @@ public class MyEngine extends Engine {
         arrivalProcesses = new ArrivalProcess[5];
         servicePoints[0] = new ServicePoint("Ticket Check 1", new Normal(10, 5), eventList, EventType.B3_TICKET_CHECK_FINISH);
         servicePoints[1] = new ServicePoint("Ticket Check 2", new Normal(10, 5), eventList, EventType.B4_TICKET_CHECK_FINISH);
-        trainStations[0] = new TrainStation("Train Station 1", new Normal(60, 30), new Normal(70, 30), eventList, EventType.B5_TRAIN1_DEPARTURE);
-        trainStations[1] = new TrainStation("Train Station 2", new Normal(60, 30), new Normal(80, 50), eventList, EventType.B6_TRAIN2_DEPARTURE);
-        trainStations[2] = new TrainStation("Metro Station", new Normal(30, 10), new Normal(100, 25), eventList, EventType.B7_TRAIN3_DEPARTURE);
+        trainStations[0] = new TrainStation("Train Station 1", new Normal(120, 30), new Normal(70, 30), eventList, EventType.B5_TRAIN1_DEPARTURE);
+        trainStations[1] = new TrainStation("Train Station 2", new Normal(120, 30), new Normal(80, 50), eventList, EventType.B6_TRAIN2_DEPARTURE);
+        trainStations[2] = new TrainStation("Metro Station", new Normal(60, 10), new Normal(100, 25), eventList, EventType.B7_TRAIN3_DEPARTURE);
         arrivalProcesses[0] = new ArrivalProcess(new Negexp(10), eventList, EventType.B1_PASSENGER_ARRIVAL);
         arrivalProcesses[1] = new ArrivalProcess(new Negexp(10), eventList, EventType.B2_PASSENGER_ARRIVAL);
         arrivalProcesses[2] = new ArrivalProcess(new Normal(1800, 120), eventList, EventType.B8_TRAIN1_ARRIVAL);

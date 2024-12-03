@@ -73,4 +73,9 @@ public class TrainStation extends ServicePoint{
     }
     public double getMeanTravelTime(){return (double) totalTrainTravelTime / totalTrains;}
     public double getMeanLoadedCapacity(){return (double) totalLoadedCapacity / totalTrains;}
+    @Override
+    public double getMeanServiceTime() {
+        if(totalTrains == 0) return 0;
+        return serviceTimeSum / totalTrains;
+    }
 }
