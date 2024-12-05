@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="362.0" prefWidth="476.0" spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="362.0" prefWidth="476.0" spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
     <Label style="-fx-font-size: 24px;" text="StationMaster Simulation">
       <font>
          <Font name="System Bold" size="18.0" />
@@ -38,10 +38,10 @@
          <Label text="Hours:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          <Label text="Minutes:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          <Label text="Seconds:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-         <TextField promptText="Days" GridPane.rowIndex="2" />
-         <TextField promptText="Hours (below 24)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         <TextField promptText="Minutes (Below 60)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-         <TextField promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         <TextField fx:id="dayField" promptText="Days" GridPane.rowIndex="2" />
+         <TextField fx:id="hourField" promptText="Hours (below 24)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <TextField fx:id="minuteField" promptText="Minutes (Below 60)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         <TextField fx:id="secondsField" promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       </children>
    </GridPane>
    <HBox prefHeight="25.0" prefWidth="456.0" spacing="10.0">
@@ -51,11 +51,11 @@
                <Font name="System Italic" size="15.0" />
             </font>
          </Label>
-         <TextField prefHeight="25.0" prefWidth="401.0" promptText="Enter only numbers" />
+         <TextField fx:id="seedField" prefHeight="25.0" prefWidth="401.0" promptText="Enter only numbers" />
       </children>
    </HBox>
 
-    <Button text="Run Simulation" />
+    <Button text="Run Simulation" fx:id="startButton"/>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
