@@ -65,13 +65,14 @@ public class StartController extends Controller {
         if(!secondField.getText().isEmpty()){
             total += Long.parseLong(secondField.getText());
         }
-        if(total == 0) return 1000L;
+        if(total == 0) return 10000L;
         return total;
     }
     private long getSeed(){
         // I'm so fucking smart. The Eduni seed is actually an int (32 bits) even though it takes a long.
         // This means we need to take the remainder that fits inside the Integer.
         if(seedField.getText().isEmpty()) return System.currentTimeMillis() % Integer.MAX_VALUE;
-        return Long.parseLong(seedField.getText());
+        long seed = Long.parseLong(seedField.getText());
+        return seed % Integer.MAX_VALUE;
     }
 }
