@@ -1,11 +1,11 @@
 package Controller;
 
-import View.StationApplication;
+import Model.simulation.model.MyEngine;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.application.Platform;
 
 public class SimulationController extends Controller {
-
     @FXML
     private Label speedLabel;
 
@@ -26,6 +26,26 @@ public class SimulationController extends Controller {
 
     @FXML
     private Label trainStation2Label;
+
+    public void initialize() {
+        // Start the engine thread
+        Thread engineThread = new Thread(() -> {
+            try {
+                // Perform long-running operations
+                long[] simulationData = super.application.getSimulationData();
+                MyEngine myEngine = new MyEngine();
+                myEngine.setSimulationTime(simulationData[0]);
+                myEngine.run();
+
+                // Once the operation is complete, update the UI on the JavaFX Application Thread
+                Platform.runLater(() -> super.application.showResultView());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        engineThread.setDaemon(true);
+        engineThread.start();
+    }
 
     public void updateSpeed(double speed) {
         speedLabel.setText("Speed: " + speed);

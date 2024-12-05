@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 public class StationApplication extends Application {
     private static Stage primaryStage;
+    //
     private static long[] simulationData;
     public void start(Stage stage) {
         this.primaryStage = stage;
@@ -77,6 +78,9 @@ public class StationApplication extends Application {
         launch(args);
     }
     public void setSimulationData(long[] simulationData){
-        this.simulationData = simulationData;
+        StationApplication.simulationData = simulationData;
+    }
+    public static long[] getSimulationData() {
+        return StationApplication.simulationData;
     }
 }
