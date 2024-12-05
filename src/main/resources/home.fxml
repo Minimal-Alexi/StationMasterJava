@@ -44,7 +44,7 @@
          <TextField promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       </children>
    </GridPane>
-   <HBox prefHeight="25.0" prefWidth="456.0">
+   <HBox prefHeight="25.0" prefWidth="456.0" spacing="10.0">
       <children>
          <Label text="Seed:">
             <font>
