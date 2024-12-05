@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SimulationController">
+   <children>
+      <HBox prefHeight="42.0" prefWidth="638.0" spacing="20.0">
+         <children>
+            <Label fx:id="speedLabel" prefHeight="52.0" prefWidth="78.0" text="Speed: " />
+            <Label fx:id="timeLabel" prefHeight="59.0" prefWidth="91.0" text="Time: " />
+            <Label prefHeight="51.0" prefWidth="437.0" text="Simulation screen">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <VBox layoutX="69.0" layoutY="75.0" prefHeight="127.0" prefWidth="94.0">
+         <children>
+            <Label text="Ticket check 1:" />
+            <StackPane>
+               <Circle fill="#ffffff00" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+               <Label fx:id="ticketCheck1Label" text="0" />
+            </StackPane>
+         </children>
+      </VBox>
+      <VBox layoutX="69.0" layoutY="254.0" prefHeight="127.0" prefWidth="84.0">
+         <children>
+            <Label text="Ticket check 2:" />
+            <StackPane>
+               <Circle fill="#ffffff00" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+               <Label fx:id="ticketCheck2Label" text="0" />
+            </StackPane>
+         </children>
+      </VBox>
+      <VBox layoutX="418.0" layoutY="295.0" prefHeight="108.0" prefWidth="94.0">
+         <children>
+            <Label text="Metro station:" />
+            <StackPane>
+               <Circle fill="#ffffff00" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+               <Label fx:id="metroStationLabel" text="0" />
+            </StackPane>
+         </children>
+      </VBox>
+      <VBox layoutX="423.0" layoutY="59.0" prefHeight="70.0" prefWidth="84.0">
+         <children>
+            <Label text="Train station 1:" />
+            <StackPane>
+               <Circle fill="#ffffff00" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+               <Label fx:id="trainStation1Label" text="0" />
+            </StackPane>
+         </children>
+      </VBox>
+      <VBox layoutX="418.0" layoutY="174.0" prefHeight="42.0" prefWidth="94.0">
+         <children>
+            <Label text="Train station 2:" />
+            <StackPane>
+               <Circle fill="#ffffff00" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+               <Label fx:id="trainStation2Label" text="0" />
+            </StackPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
