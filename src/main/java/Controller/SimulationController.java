@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.application.Platform;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class SimulationController extends Controller {
     @FXML
     private Label speedLabel;
@@ -38,7 +42,12 @@ public class SimulationController extends Controller {
                 myEngine.run();
 
                 // Once the operation is complete, update the UI on the JavaFX Application Thread
-                Platform.runLater(() -> super.application.showResultView());
+                ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+                scheduler.schedule(() -> {
+                    // Update the UI after the delay
+                    Platform.runLater(() -> application.showResultView());
+                    scheduler.shutdown();
+                }, 5, TimeUnit.SECONDS);
             } catch (Exception e) {
                 e.printStackTrace();
             }

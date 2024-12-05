@@ -1,5 +1,6 @@
 package View;
 
+import Controller.ResultController;
 import Controller.SimulationController;
 import Controller.StartController;
 
@@ -60,7 +61,7 @@ public class StationApplication extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Result.fxml"));
             Parent startLayout = loader.load();
 
-            StartController controller = loader.getController();
+            ResultController controller = loader.getController();
             controller.setApplication(this);
 
             Scene scene = new Scene(startLayout);
