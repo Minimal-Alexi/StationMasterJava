@@ -1,9 +1,11 @@
 package Controller;
 
+import View.StationApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class SimulationController {
+    private StationApplication application;
 
     @FXML
     private Label speedLabel;
@@ -52,5 +54,8 @@ public class SimulationController {
 
     public void updateTrainStation2(int customersServed) {
         trainStation2Label.setText(String.valueOf(customersServed));
+    }
+    public void setApplication(StationApplication application) {
+        this.application = application;
     }
 }

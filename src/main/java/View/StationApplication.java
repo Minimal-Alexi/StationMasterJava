@@ -1,5 +1,6 @@
 package View;
 
+import Controller.SimulationController;
 import Controller.StartController;
 
 import javafx.application.Application;
@@ -9,10 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.net.URL;
-
 public class StationApplication extends Application {
     private static Stage primaryStage;
+    private static long[] simulationData;
     public void start(Stage stage) {
         this.primaryStage = stage;
         primaryStage.setTitle("StationMaster");
@@ -38,10 +38,10 @@ public class StationApplication extends Application {
     }
     public void showSimulationView(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Simulation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Simulation.fxml"));
             Parent simulationLayout = loader.load();
 
-            StartController controller = loader.getController();
+            SimulationController controller = loader.getController();
             controller.setApplication(this);
 
             Scene scene = new Scene(simulationLayout);
@@ -56,7 +56,7 @@ public class StationApplication extends Application {
     }
     public void showResultView(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Result.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Result.fxml"));
             Parent startLayout = loader.load();
 
             StartController controller = loader.getController();
@@ -75,5 +75,8 @@ public class StationApplication extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+    }
+    public void setSimulationData(long[] simulationData){
+        this.simulationData = simulationData;
     }
 }
