@@ -41,7 +41,7 @@
          <TextField fx:id="dayField" promptText="Days" GridPane.rowIndex="2" />
          <TextField fx:id="hourField" promptText="Hours (below 24)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          <TextField fx:id="minuteField" promptText="Minutes (Below 60)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-         <TextField fx:id="secondsField" promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         <TextField fx:id="secondField" promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       </children>
    </GridPane>
    <HBox prefHeight="25.0" prefWidth="456.0" spacing="10.0">
