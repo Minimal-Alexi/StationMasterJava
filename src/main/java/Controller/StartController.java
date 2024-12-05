@@ -7,8 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 
 
-public class StartController {
-    private StationApplication application;
+public class StartController extends Controller {
 
     @FXML
     TextField dayField, hourField, minuteField, secondField,seedField;
@@ -25,12 +24,9 @@ public class StartController {
             simulationData[0] = getTotalTime();
             simulationData[1] = getSeed();
             System.out.printf("Runtime: %d \nSeed: %d\n\n",simulationData[0],simulationData[1]);
-            application.setSimulationData(simulationData);
-            application.showSimulationView();
+            super.application.setSimulationData(simulationData);
+            super.application.showSimulationView();
         });
-    }
-    public void setApplication(StationApplication application) {
-        this.application = application;
     }
     private void integerFormatter(TextField textField, int max) {
         if(max > 0)
