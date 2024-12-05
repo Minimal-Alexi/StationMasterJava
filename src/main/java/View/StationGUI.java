@@ -1,5 +1,6 @@
 package View;
 
+import Controller.SimulationController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +15,7 @@ public class StationGUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         instance = this;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/simulation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Simulation.fxml"));
         Parent root = loader.load();
         simulationController = loader.getController();
 
