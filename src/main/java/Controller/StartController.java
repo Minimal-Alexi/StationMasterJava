@@ -69,7 +69,9 @@ public class StartController extends Controller {
         return total;
     }
     private long getSeed(){
-        if(seedField.getText().isEmpty()) return System.currentTimeMillis();
+        // I'm so fucking smart. The Eduni seed is actually an int (32 bits) even though it takes a long.
+        // This means we need to take the remainder that fits inside the Integer.
+        if(seedField.getText().isEmpty()) return System.currentTimeMillis() % Integer.MAX_VALUE;
         return Long.parseLong(seedField.getText());
     }
 }

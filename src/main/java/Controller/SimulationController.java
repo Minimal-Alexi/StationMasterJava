@@ -33,7 +33,7 @@ public class SimulationController extends Controller {
             try {
                 // Perform long-running operations
                 long[] simulationData = super.application.getSimulationData();
-                MyEngine myEngine = new MyEngine();
+                MyEngine myEngine = new MyEngine(simulationData[1]);
                 myEngine.setSimulationTime(simulationData[0]);
                 myEngine.run();
 
