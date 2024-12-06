@@ -126,6 +126,20 @@ public class MyEngine extends Engine {
         }
     }
 
+    public String[] getResultsAsString() {
+        String[] results = new String[9];
+        results[0] = String.valueOf(trainStations[0].getQueueSize());
+        results[1] = String.valueOf(trainStations[0].getCustomerServiced());
+        results[2] = String.valueOf(trainStations[0].getMeanServiceTime());
+        results[3] = String.valueOf(trainStations[1].getQueueSize());
+        results[4] = String.valueOf(trainStations[1].getCustomerServiced());
+        results[5] = String.valueOf(trainStations[1].getMeanServiceTime());
+        results[6] = String.valueOf(trainStations[2].getQueueSize());
+        results[7] = String.valueOf(trainStations[2].getCustomerServiced());
+        results[8] = String.valueOf(trainStations[2].getMeanServiceTime());
+        return results;
+    }
+
     private void passengerListReport(ArrayList<Passenger> passengers) {
         if (passengers != null && !passengers.isEmpty()) {
             for (Passenger passenger : passengers) {

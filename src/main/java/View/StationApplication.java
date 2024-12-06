@@ -3,7 +3,7 @@ package View;
 import Controller.ResultController;
 import Controller.SimulationController;
 import Controller.StartController;
-
+import Model.simulation.model.MyEngine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,14 +13,15 @@ import javafx.stage.Stage;
 
 public class StationApplication extends Application {
     private static Stage primaryStage;
-    //
     private static long[] simulationData;
+
     public void start(Stage stage) {
         this.primaryStage = stage;
         primaryStage.setTitle("StationMaster");
         showStartView();
     }
-    public void showStartView(){
+
+    public void showStartView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Start.fxml"));
             Parent startLayout = loader.load();
@@ -38,7 +39,8 @@ public class StationApplication extends Application {
             alert.showAndWait();
         }
     }
-    public void showSimulationView(){
+
+    public void showSimulationView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Simulation.fxml"));
             Parent simulationLayout = loader.load();
@@ -56,7 +58,8 @@ public class StationApplication extends Application {
             alert.showAndWait();
         }
     }
-    public void showResultView(){
+
+    public void showResultView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Result.fxml"));
             Parent startLayout = loader.load();
@@ -75,13 +78,17 @@ public class StationApplication extends Application {
             alert.showAndWait();
         }
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
-    public void setSimulationData(long[] simulationData){
+
+    public void setSimulationData(long[] simulationData) {
         StationApplication.simulationData = simulationData;
     }
+
     public static long[] getSimulationData() {
         return StationApplication.simulationData;
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
