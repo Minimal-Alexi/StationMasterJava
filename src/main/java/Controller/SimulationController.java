@@ -2,8 +2,10 @@ package Controller;
 
 import Model.simulation.model.MyEngine;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.application.Platform;
+import javafx.scene.control.Slider;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -11,28 +13,17 @@ import java.util.concurrent.TimeUnit;
 
 public class SimulationController extends Controller {
     @FXML
-    private Label speedLabel;
-
+    private Slider speedSlider;
+    @FXML
+    private Canvas simulationCanvas;
     @FXML
     private Label timeLabel;
 
-    @FXML
-    private Label ticketCheck1Label;
-
-    @FXML
-    private Label ticketCheck2Label;
-
-    @FXML
-    private Label metroStationLabel;
-
-    @FXML
-    private Label trainStation1Label;
-
-    @FXML
-    private Label trainStation2Label;
-
     public void initialize() {
-        // Start the engine thread
+        //Get Engine
+        Thread engineThread = engineThreadCreator();
+    }
+    private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
             try {
                 // Perform long-running operations
@@ -53,34 +44,6 @@ public class SimulationController extends Controller {
             }
         });
         engineThread.setDaemon(true);
-        engineThread.start();
-    }
-
-    public void updateSpeed(double speed) {
-        speedLabel.setText("Speed: " + speed);
-    }
-
-    public void updateTime(double time) {
-        timeLabel.setText("Time: " + time);
-    }
-
-    public void updateTicketCheck1(int customersServed) {
-        ticketCheck1Label.setText(String.valueOf(customersServed));
-    }
-
-    public void updateTicketCheck2(int customersServed) {
-        ticketCheck2Label.setText(String.valueOf(customersServed));
-    }
-
-    public void updateMetroStation(int customersServed) {
-        metroStationLabel.setText(String.valueOf(customersServed));
-    }
-
-    public void updateTrainStation1(int customersServed) {
-        trainStation1Label.setText(String.valueOf(customersServed));
-    }
-
-    public void updateTrainStation2(int customersServed) {
-        trainStation2Label.setText(String.valueOf(customersServed));
+        return engineThread;
     }
 }
