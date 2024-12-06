@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 
 public class StationApplication extends Application {
     private static Stage primaryStage;
-    //
-    private static long[] simulationData;
     public void start(Stage stage) {
         this.primaryStage = stage;
         primaryStage.setTitle("StationMaster");
@@ -69,16 +67,10 @@ public class StationApplication extends Application {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText("Something went wrong.\n" + e.getMessage());
-        System.err.println(e.getMessage());
+        e.printStackTrace();
         alert.showAndWait();
     }
     public static void main(String[] args) {
         launch(args);
-    }
-    public void setSimulationData(long[] simulationData){
-        StationApplication.simulationData = simulationData;
-    }
-    public static long[] getSimulationData() {
-        return StationApplication.simulationData;
     }
 }

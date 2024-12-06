@@ -1,5 +1,6 @@
 package Controller;
 
+import View.StationApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -22,8 +23,8 @@ public class StartController extends Controller {
             long[] simulationData = new long[2];
             simulationData[0] = getTotalTime();
             simulationData[1] = getSeed();
-            super.application.setSimulationData(simulationData);
-            super.application.showSimulationView();
+            SimulationController.setSimulationData(simulationData);
+            application.showSimulationView();
         });
     }
     private void integerFormatter(TextField textField, int max) {

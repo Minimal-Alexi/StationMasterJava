@@ -21,23 +21,26 @@ public class SimulationController extends Controller {
     @FXML
     private Label timeLabel;
 
+    private static long[] simulationData;
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%d Days - %d Hours - %d Minutes - %d Seconds";
-    private final GraphicsContext simulationCtx = simulationCanvas.getGraphicsContext2D();
+
+    private GraphicsContext simulationCtx;
 
     public void initialize() {
         //Create Engine
+        canvasInitializer();
         Thread engineThread = engineThreadCreator();
     }
     private void canvasInitializer() {
-
-
+        simulationCtx = simulationCanvas.getGraphicsContext2D();
+        simulationCtx.setFill(backgroundColor);
+        simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
     }
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
             try {
                 // Perform long-running operations
-                long[] simulationData = super.application.getSimulationData();
                 MyEngine myEngine = new MyEngine(simulationData[1]);
                 myEngine.setSimulationTime(simulationData[0]);
                 myEngine.run();
@@ -55,6 +58,9 @@ public class SimulationController extends Controller {
         });
         engineThread.setDaemon(true);
         return engineThread;
+    }
+    public static void setSimulationData(long[] simulationData) {
+        SimulationController.simulationData = simulationData;
     }
     public static Color getBackgroundColor() {
         return backgroundColor;
