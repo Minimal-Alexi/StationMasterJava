@@ -40,6 +40,7 @@ public class SimulationController extends Controller {
         simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
         testDisplayPassengers();
         testDisplayServicePoints();
+        testTrainStationDisplay();
     }
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
@@ -73,6 +74,15 @@ public class SimulationController extends Controller {
         for(int i = 0; i < 4; ++i){
             ServicePointVisualization servicePointVisualization = new ServicePointVisualization(i * ServicePointVisualization.xSize,100,simulationCtx);
             servicePointVisualization.drawVisualization();
+        }
+    }
+    private void testTrainStationDisplay(){
+        for(int i = 0; i < 3; ++i){
+            TrainStationVisualization trainStationVisualization = new TrainStationVisualization(i * TrainStationVisualization.xSize,200,simulationCtx);
+            if(i%2 == 0){
+                trainStationVisualization.setTrainArrived(true);
+            }
+            trainStationVisualization.drawVisualization();
         }
     }
     public static void setSimulationData(long[] simulationData) {
