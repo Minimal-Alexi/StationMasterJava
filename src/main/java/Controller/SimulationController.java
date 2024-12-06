@@ -3,9 +3,11 @@ package Controller;
 import Model.simulation.model.MyEngine;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.application.Platform;
 import javafx.scene.control.Slider;
+import javafx.scene.paint.Color;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,9 +21,17 @@ public class SimulationController extends Controller {
     @FXML
     private Label timeLabel;
 
+    private static final Color backgroundColor = Color.CADETBLUE;
+    private static final String timeFormat = "%d Days - %d Hours - %d Minutes - %d Seconds";
+    private final GraphicsContext simulationCtx = simulationCanvas.getGraphicsContext2D();
+
     public void initialize() {
-        //Get Engine
+        //Create Engine
         Thread engineThread = engineThreadCreator();
+    }
+    private void canvasInitializer() {
+
+
     }
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
