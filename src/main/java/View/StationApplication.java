@@ -32,10 +32,7 @@ public class StationApplication extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Something went wrong.\n" + e.getMessage());
-            alert.showAndWait();
+            alertSystem(e);
         }
     }
     public void showSimulationView(){
@@ -50,10 +47,7 @@ public class StationApplication extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Something went wrong.\n" + e.getMessage());
-            alert.showAndWait();
+            alertSystem(e);
         }
     }
     public void showResultView(){
@@ -68,12 +62,15 @@ public class StationApplication extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Something went wrong.\n" + e.getMessage());
-            System.err.println(e.getMessage());
-            alert.showAndWait();
+            alertSystem(e);
         }
+    }
+    public void alertSystem(Exception e){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText("Something went wrong.\n" + e.getMessage());
+        System.err.println(e.getMessage());
+        alert.showAndWait();
     }
     public static void main(String[] args) {
         launch(args);

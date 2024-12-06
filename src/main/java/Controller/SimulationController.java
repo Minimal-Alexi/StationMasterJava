@@ -40,7 +40,7 @@ public class SimulationController extends Controller {
                     scheduler.shutdown();
                 }, 5, TimeUnit.SECONDS);
             } catch (Exception e) {
-                e.printStackTrace();
+                application.alertSystem(e);
             }
         });
         engineThread.setDaemon(true);
