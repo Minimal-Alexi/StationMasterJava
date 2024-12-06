@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 
 
 public class PassengerVisualization extends AbstractVisualization{
-    private static final int xSize = 20, ySize = 20;
+    public static final int xSize = 50, ySize = 50;
     private static final Bernoulli genderDecider = new Bernoulli(0.5);
     private final Image image;
     public PassengerVisualization(int x, int y, GraphicsContext graphicsContext) {

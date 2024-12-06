@@ -38,6 +38,8 @@ public class SimulationController extends Controller {
         simulationCtx = simulationCanvas.getGraphicsContext2D();
         simulationCtx.setFill(backgroundColor);
         simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
+        testDisplayPassengers();
+        testDisplayServicePoints();
     }
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
@@ -63,8 +65,14 @@ public class SimulationController extends Controller {
     }
     private void testDisplayPassengers(){
         for(int i=0; i<10; ++i){
-            PassengerVisualization passengerVisualization = new PassengerVisualization(i * 20,0,simulationCtx);
+            PassengerVisualization passengerVisualization = new PassengerVisualization(i * PassengerVisualization.xSize,0,simulationCtx);
             passengerVisualization.drawVisualization();
+        }
+    }
+    private void testDisplayServicePoints(){
+        for(int i = 0; i < 4; ++i){
+            ServicePointVisualization servicePointVisualization = new ServicePointVisualization(i * ServicePointVisualization.xSize,100,simulationCtx);
+            servicePointVisualization.drawVisualization();
         }
     }
     public static void setSimulationData(long[] simulationData) {
