@@ -8,7 +8,7 @@ public class Main {
         System.out.println("Simulator\n");
         Engine engine = new MyEngine(System.currentTimeMillis() % Integer.MAX_VALUE);
 
-        engine.setSimulationTime(25);
+        engine.setSimulationTime(10000);
         engine.run();
     }
 }
