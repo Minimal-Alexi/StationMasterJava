@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.simulation.model.MyEngine;
+import View.Visualisation.*;
+
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -58,6 +60,12 @@ public class SimulationController extends Controller {
         });
         engineThread.setDaemon(true);
         return engineThread;
+    }
+    private void testDisplayPassengers(){
+        for(int i=0; i<10; ++i){
+            PassengerVisualization passengerVisualization = new PassengerVisualization(i * 20,0,simulationCtx);
+            passengerVisualization.drawVisualization();
+        }
     }
     public static void setSimulationData(long[] simulationData) {
         SimulationController.simulationData = simulationData;
