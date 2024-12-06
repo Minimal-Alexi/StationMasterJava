@@ -56,4 +56,7 @@ public class SimulationController extends Controller {
         engineThread.setDaemon(true);
         return engineThread;
     }
+    public static Color getBackgroundColor() {
+        return backgroundColor;
+    }
 }
