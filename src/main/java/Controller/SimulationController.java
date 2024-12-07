@@ -22,8 +22,10 @@ public class SimulationController extends Controller {
     private Label timeLabel;
 
     private static long[] simulationData;
+    private static String[] simulationResults;
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%d Days - %d Hours - %d Minutes - %d Seconds";
+    private MyEngine myEngine;
 
     private GraphicsContext simulationCtx;
 
@@ -41,15 +43,17 @@ public class SimulationController extends Controller {
         Thread engineThread = new Thread(() -> {
             try {
                 // Perform long-running operations
-                MyEngine myEngine = new MyEngine(simulationData[1]);
+                myEngine = new MyEngine(simulationData[1]);
                 myEngine.setSimulationTime(simulationData[0]);
                 myEngine.run();
+
+                simulationResults = myEngine.getResultsAsString();
 
                 // Once the operation is complete, update the UI on the JavaFX Application Thread
                 ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
                 scheduler.schedule(() -> {
                     // Update the UI after the delay
-                    Platform.runLater(() -> application.showResultView());
+                    Platform.runLater(() -> application.showResultView(simulationResults));
                     scheduler.shutdown();
                 }, 5, TimeUnit.SECONDS);
             } catch (Exception e) {

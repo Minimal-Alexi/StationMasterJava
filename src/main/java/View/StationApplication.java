@@ -48,13 +48,15 @@ public class StationApplication extends Application {
             alertSystem(e);
         }
     }
-    public void showResultView(){
+    public void showResultView(String[] simulationResults){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Result.fxml"));
             Parent startLayout = loader.load();
 
             ResultController controller = loader.getController();
             controller.setApplication(this);
+            // Pass the results to the controller
+            controller.setResults(simulationResults);
 
             Scene scene = new Scene(startLayout);
             primaryStage.setScene(scene);
