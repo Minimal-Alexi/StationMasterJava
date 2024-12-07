@@ -68,7 +68,7 @@ public class SimulationController extends Controller {
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
             try {
-                // Perform long-running operations
+                // simulationData[1] == Seed, simulationData[0] = Time
                 MyEngine myEngine = new MyEngine(simulationData[1]);
                 myEngine.setSimulationTime(simulationData[0]);
                 visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
@@ -81,27 +81,6 @@ public class SimulationController extends Controller {
         });
         engineThread.setDaemon(true);
         return engineThread;
-    }
-    private void testDisplayPassengers(){
-        for(int i=0; i<10; ++i){
-            PassengerVisualization passengerVisualization = new PassengerVisualization(i * PassengerVisualization.xSize,0,simulationCtx);
-            passengerVisualization.drawVisualization();
-        }
-    }
-    private void testDisplayServicePoints(){
-        for(int i = 0; i < 4; ++i){
-            ServicePointVisualization servicePointVisualization = new ServicePointVisualization(i * ServicePointVisualization.xSize,100,simulationCtx);
-            servicePointVisualization.drawVisualization();
-        }
-    }
-    private void testTrainStationDisplay(){
-        for(int i = 0; i < 3; ++i){
-            TrainStationVisualization trainStationVisualization = new TrainStationVisualization(i * TrainStationVisualization.xSize,200,simulationCtx);
-            if(i%2 == 0){
-                trainStationVisualization.setTrainArrived(true);
-            }
-            trainStationVisualization.drawVisualization();
-        }
     }
     private void mapStateRefresher(){
         simulationCtx.setFill(backgroundColor);
@@ -131,12 +110,12 @@ public class SimulationController extends Controller {
     private void curveDrawer(){
         simulationCtx.setStroke(Color.BLACK);
         simulationCtx.setLineWidth(2);
-        int startPoints[][] = new int[2][2];
+        int[][] startPoints = new int[2][2];
         for(int i = 0 ; i < 2; ++i){
             startPoints[i][0] = servicePointVisualization[i].centerCoordinateX + 35;
             startPoints[i][1] = servicePointVisualization[i].centerCoordinateY;
         }
-        int endPoints[][] = new int[3][2];
+        int[][] endPoints = new int[3][2];
         endPoints[0][0] = 350;
         endPoints[1][0] = 350;
         endPoints[2][0] = 350;
@@ -160,6 +139,27 @@ public class SimulationController extends Controller {
                     simulationCtx.stroke();
                 }
             }
+        }
+    }
+    private void testDisplayPassengers(){
+        for(int i=0; i<10; ++i){
+            PassengerVisualization passengerVisualization = new PassengerVisualization(i * PassengerVisualization.xSize,0,simulationCtx);
+            passengerVisualization.drawVisualization();
+        }
+    }
+    private void testDisplayServicePoints(){
+        for(int i = 0; i < 4; ++i){
+            ServicePointVisualization servicePointVisualization = new ServicePointVisualization(i * ServicePointVisualization.xSize,100,simulationCtx);
+            servicePointVisualization.drawVisualization();
+        }
+    }
+    private void testTrainStationDisplay(){
+        for(int i = 0; i < 3; ++i){
+            TrainStationVisualization trainStationVisualization = new TrainStationVisualization(i * TrainStationVisualization.xSize,200,simulationCtx);
+            if(i%2 == 0){
+                trainStationVisualization.setTrainArrived(true);
+            }
+            trainStationVisualization.drawVisualization();
         }
     }
     public static void setSimulationData(long[] simulationData) {
