@@ -129,6 +129,9 @@ public class SimulationController extends Controller {
         for(int i=0; i<servicePoints.length; ++i){
             String displayName = String.format(standardName,servicePoints[i].getName(),servicePoints[i].getQueueSize());
             servicePointVisualization[i].setName(displayName);
+            if(servicePoints[i].isReserved() != servicePointVisualization[i].isReserved()){
+                servicePointVisualization[i].setIsReserved(servicePoints[i].isReserved());
+            }
         }
         for(int i=0; i<trainStations.length; ++i){
             String displayName;
