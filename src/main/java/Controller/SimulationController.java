@@ -38,6 +38,7 @@ public class SimulationController extends Controller {
     private void canvasInitializer() {
         //simulationCtx init
         simulationCtx = simulationCanvas.getGraphicsContext2D();
+        simulationCtx.setFont(javafx.scene.text.Font.font("Arial",14));
         simulationCtx.setFill(backgroundColor);
         simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
 

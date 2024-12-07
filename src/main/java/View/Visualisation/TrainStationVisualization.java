@@ -31,6 +31,8 @@ public class TrainStationVisualization extends AbstractVisualization{
             imageToDraw = Railway;
         }
         graphicsContext.drawImage(imageToDraw,x + xSizeBuilding + distanceBuildingRailroad,y,xSizeRailroad,ySizeRailroad);
+        super.graphicsContext.setFill(Color.BLACK);
+        graphicsContext.fillText(name,x,y + ySizeBuilding + 25);
     }
 
     @Override
