@@ -15,7 +15,6 @@ import javafx.util.Duration;
 
 
 public class PassengerVisualization extends AbstractVisualization{
-    private static int currentSpeed = 1000,maxTime = 2000;
     private static final int xSize = 50, ySize = 50;
     private static final Bernoulli genderDecider = new Bernoulli(0.5);
     private final Image image;
@@ -38,30 +37,14 @@ public class PassengerVisualization extends AbstractVisualization{
     public void clearVisualization() {
         super.graphicsContext.clearRect(super.x,super.y,xSize,ySize);
     }
-    public void animateImage(int xDest, int yDest){
-        IntegerProperty xProperty = new SimpleIntegerProperty(),yProperty = new SimpleIntegerProperty();
-        xProperty.setValue(x);
-        yProperty.setValue(y);
-
-        Timeline timeline = new Timeline();
-
-        KeyValue xValue = new KeyValue(xProperty,xDest);
-        KeyValue yValue = new KeyValue(yProperty,yDest);
-
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(maxTime - currentSpeed),xValue,yValue);
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
-            drawVisualization();
-        });
-        timeline.play();
+    public void setPosition(int x, int y){
+        super.x = x;
+        super.y = y;
     }
     public static int getxSize(){
         return xSize;
     }
     public static int getySize(){
         return ySize;
-    }
-    public static void setCurrentSpeed(int speed){
-        currentSpeed = speed;
     }
 }

@@ -18,4 +18,10 @@ public abstract class AbstractVisualization implements InterfaceVisualization{
     public void setName(String name) {
         this.name = name;
     }
+    public int getX() {
+        return x;
+    }
+    public int getY(){
+        return y;
+    }
 }

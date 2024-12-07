@@ -1,11 +1,19 @@
 package View.Visualisation;
 
+import Controller.SimulationController;
 import Model.simulation.model.Passenger;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class TrainStationVisualization extends AbstractVisualization{
+    public static int maxTime = 2000,currentSpeed = 1000;
     private static final Image Railway = new Image("images/railroad.png");
     private static final Image Train = new Image("images/train.png");
     private static final Color color = Color.GOLD;
@@ -32,6 +40,65 @@ public class TrainStationVisualization extends AbstractVisualization{
     public void setPassengerCount(int passengerCount){this.passengerCount = passengerCount;}
     @Override
     public void drawVisualization(){
+        drawStation();
+        drawPassengers();
+    }
+
+    @Override
+    public void clearVisualization() {
+        graphicsContext.clearRect(x,y,xSize * 2 + 25,ySize * 2);
+    }
+    public void loadPassengers(){
+        Timeline timeline = new Timeline();
+        int centerRailwayX = x + xSizeBuilding + distanceBuildingRailroad + xSizeRailroad / 2,
+        centerRailwayY = y + ySizeBuilding / 2;
+        for(int i = 0; i < nrRows; i++){
+            for(int j = 0; j < nrColumns; j++){
+                if(passengerVisualizations[i][j]!= null){
+                    PassengerVisualization passenger= passengerVisualizations[i][j];
+                    IntegerProperty xProperty = new SimpleIntegerProperty(passengerVisualizations[i][j].getX());
+                    IntegerProperty yProperty = new SimpleIntegerProperty(passengerVisualizations[i][j].getY());
+
+                    KeyValue xValue = new KeyValue(xProperty, centerRailwayX);
+                    KeyValue yValue = new KeyValue(yProperty, centerRailwayY);
+
+                    KeyFrame keyFrame = new KeyFrame(
+                            Duration.millis(maxTime - currentSpeed), // Duration of animation
+                            e -> {
+                                passenger.setPosition(centerRailwayX, centerRailwayY);
+                            },
+                            xValue,
+                            yValue
+                    );
+                    timeline.getKeyFrames().add(keyFrame);
+                    xProperty.addListener((obs, oldVal, newVal) -> {
+                        passenger.clearVisualization();
+                        drawVisualization();
+                        passenger.setPosition(newVal.intValue(), passenger.getY());
+                        passenger.drawVisualization();
+                    });
+
+                    yProperty.addListener((obs, oldVal, newVal) -> {
+                        passenger.clearVisualization();
+                        drawVisualization();
+                        passenger.setPosition(passenger.getX(), newVal.intValue());
+                        passenger.drawVisualization();
+                    });
+                }
+            }
+        }
+        timeline.play();
+        drawPassengers();
+    }
+    public boolean isTrainArrived(){
+        return trainArrived;
+    }
+    public static void setCurrentSpeed(int currentSpeed){
+        TrainStationVisualization.currentSpeed = currentSpeed;
+    }
+    private void drawStation(){
+        graphicsContext.setFill(SimulationController.getBackgroundColor());
+        graphicsContext.fillRect(x,y,xSize,ySize);
         graphicsContext.setFill(color);
         graphicsContext.fillRect(x,y,xSizeBuilding,ySizeBuilding);
         Image imageToDraw;
@@ -44,27 +111,6 @@ public class TrainStationVisualization extends AbstractVisualization{
         graphicsContext.drawImage(imageToDraw,x + xSizeBuilding + distanceBuildingRailroad,y,xSizeRailroad,ySizeRailroad);
         super.graphicsContext.setFill(Color.BLACK);
         graphicsContext.fillText(name,x,y + ySizeBuilding + 25);
-        drawPassengers();
-    }
-
-    @Override
-    public void clearVisualization() {
-        graphicsContext.clearRect(x,y,xSize * 2 + 25,ySize * 2);
-    }
-    public void loadPassengers(){
-        int centerRailwayX = x + xSizeBuilding + distanceBuildingRailroad + xSizeRailroad / 2,
-        centerRailwayY = y + ySizeBuilding / 2;
-        for(int i = 0; i < nrRows; i++){
-            for(int j = 0; j < nrColumns; j++){
-                if(passengerVisualizations[i][j]!= null){
-                    passengerVisualizations[i][j].animateImage(centerRailwayX,centerRailwayY);
-                    passengerVisualizations[i][j] = null;
-                }
-            }
-        }
-    }
-    public boolean isTrainArrived(){
-        return trainArrived;
     }
     private void drawPassengers(){
         int passengerViewCount = passengerCount;
