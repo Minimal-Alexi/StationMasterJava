@@ -8,7 +8,7 @@ public class TrainStationVisualization extends AbstractVisualization{
     private static final Image Railway = new Image("images/railroad.png");
     private static final Image Train = new Image("images/train.png");
     private static final Color color = Color.GOLD;
-    public static final int xSizeBuilding = 100 , ySizeBuilding = 200, xSizeRailroad = 100, ySizeRailroad = 200, distanceBuildingRailroad = 25
+    public static final int xSizeBuilding = 200 , ySizeBuilding = 200, xSizeRailroad = 100, ySizeRailroad = 200, distanceBuildingRailroad = 25
             , xSize = xSizeBuilding + distanceBuildingRailroad + xSizeRailroad, ySize = 200;
     private boolean trainArrived;
     public TrainStationVisualization(int x, int y, GraphicsContext graphicsContext){
@@ -21,7 +21,7 @@ public class TrainStationVisualization extends AbstractVisualization{
     @Override
     public void drawVisualization(){
         graphicsContext.setFill(color);
-        graphicsContext.fillRect(x,y,xSize,ySize);
+        graphicsContext.fillRect(x,y,xSizeBuilding,ySizeBuilding);
         Image imageToDraw;
         if(trainArrived){
             imageToDraw = Train;

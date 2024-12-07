@@ -26,7 +26,8 @@ public class SimulationController extends Controller {
     private static long[] simulationData;
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%d Days - %d Hours - %d Minutes - %d Seconds";
-
+    private ServicePointVisualization[] servicePointVisualization;
+    private TrainStationVisualization[] trainStationVisualization;
     private GraphicsContext simulationCtx;
 
     public void initialize() {
@@ -35,12 +36,29 @@ public class SimulationController extends Controller {
         Thread engineThread = engineThreadCreator();
     }
     private void canvasInitializer() {
+        //simulationCtx init
         simulationCtx = simulationCanvas.getGraphicsContext2D();
         simulationCtx.setFill(backgroundColor);
         simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
+
+        // Service point + train station init
+        servicePointVisualization = new ServicePointVisualization[2];
+        servicePointVisualization[0] = new ServicePointVisualization(100,350,simulationCtx);
+        servicePointVisualization[1] = new ServicePointVisualization(100,600,simulationCtx);
+
+        trainStationVisualization = new TrainStationVisualization[3];
+        trainStationVisualization[0] = new TrainStationVisualization(350,50,simulationCtx);
+        trainStationVisualization[1] = new TrainStationVisualization(350,350,simulationCtx);
+        trainStationVisualization[2] = new TrainStationVisualization(350,650,simulationCtx);
+
+        // Initial display of station + service points
+        visualizationDrawer(servicePointVisualization);
+        visualizationDrawer(trainStationVisualization);
+
+        // For testing different sprites. Adjust accordingly.
         testDisplayPassengers();
-        testDisplayServicePoints();
-        testTrainStationDisplay();
+        //testDisplayServicePoints();
+        //testTrainStationDisplay();
     }
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
@@ -83,6 +101,13 @@ public class SimulationController extends Controller {
                 trainStationVisualization.setTrainArrived(true);
             }
             trainStationVisualization.drawVisualization();
+        }
+    }
+    private void mapStateRefresher(){
+    }
+    private void visualizationDrawer(AbstractVisualization[] visualization){
+        for(int i=0; i<visualization.length; ++i){
+            visualization[i].drawVisualization();
         }
     }
     public static void setSimulationData(long[] simulationData) {
