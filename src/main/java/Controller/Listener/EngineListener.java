@@ -15,5 +15,6 @@ public class EngineListener implements EngineListenerInterface {
     public void onUpdate(ServicePoint[] servicePoints, TrainStation[] trainStations){
         simulationController.setServicePoints(servicePoints);
         simulationController.setTrainStations(trainStations);
+        simulationController.onUpdate();
     }
 }

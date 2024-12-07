@@ -104,11 +104,6 @@ public class SimulationController extends Controller {
         Thread engineThread = new Thread(() -> {
             try {
                 myEngine.run();
-                Platform.runLater(()->{
-                    visualizationNameSetter(servicePointVisualization,servicePoints);
-                    visualizationNameSetter(trainStationVisualization,trainStations);
-                    mapStateRefresher();
-                });
             } catch (Exception e) {
                 Platform.runLater(() -> {
                     application.alertSystem(e);
@@ -207,6 +202,13 @@ public class SimulationController extends Controller {
     }
     public static Color getBackgroundColor() {
         return backgroundColor;
+    }
+    public void onUpdate(){
+        Platform.runLater(()->{
+            visualizationNameSetter(servicePointVisualization,servicePoints);
+            visualizationNameSetter(trainStationVisualization,trainStations);
+            mapStateRefresher();
+        });
     }
     public void setServicePoints(ServicePoint[] servicePoints) {
         this.servicePoints = servicePoints;
