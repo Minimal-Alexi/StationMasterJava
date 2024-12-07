@@ -7,7 +7,6 @@ public class ServicePointVisualization extends AbstractVisualization {
     public static final int xSize = 70, ySize = 70;
     public int  centerCoordinateX,centerCoordinateY;
     private static final Color color = Color.GOLD;
-    private String name = "Loading Name from Simulation";
     public ServicePointVisualization(int x, int y, GraphicsContext graphicsContext) {
         super(x, y, graphicsContext);
         centerCoordinateX = x + xSize / 2;

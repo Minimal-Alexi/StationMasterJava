@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.simulation.model.MyEngine;
+import Model.simulation.model.ServicePoint;
 import View.Visualisation.*;
 
 import javafx.fxml.FXML;
@@ -34,6 +35,7 @@ public class SimulationController extends Controller {
         //Create Engine
         canvasInitializer();
         Thread engineThread = engineThreadCreator();
+        engineThread.start();
     }
     private void canvasInitializer() {
         //simulationCtx init
@@ -53,12 +55,12 @@ public class SimulationController extends Controller {
         trainStationVisualization[2] = new TrainStationVisualization(350,650,simulationCtx);
 
         // Initial display of station + service points
+        curveDrawer();
         visualizationDrawer(servicePointVisualization);
         visualizationDrawer(trainStationVisualization);
-        curveDrawer();
 
         // For testing different sprites. Adjust accordingly.
-        testDisplayPassengers();
+        //testDisplayPassengers();
         //testDisplayServicePoints();
         //testTrainStationDisplay();
     }
@@ -68,15 +70,10 @@ public class SimulationController extends Controller {
                 // Perform long-running operations
                 MyEngine myEngine = new MyEngine(simulationData[1]);
                 myEngine.setSimulationTime(simulationData[0]);
+                visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
+                visualizationNameSetter(trainStationVisualization, myEngine.getTrainStations());
+                mapStateRefresher();
                 myEngine.run();
-
-                // Once the operation is complete, update the UI on the JavaFX Application Thread
-                ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-                scheduler.schedule(() -> {
-                    // Update the UI after the delay
-                    Platform.runLater(() -> application.showResultView());
-                    scheduler.shutdown();
-                }, 5, TimeUnit.SECONDS);
             } catch (Exception e) {
                 application.alertSystem(e);
             }
@@ -106,10 +103,20 @@ public class SimulationController extends Controller {
         }
     }
     private void mapStateRefresher(){
+        simulationCtx.setFill(backgroundColor);
+        simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
+        curveDrawer();
+        visualizationDrawer(servicePointVisualization);
+        visualizationDrawer(trainStationVisualization);
     }
     private void visualizationDrawer(AbstractVisualization[] visualization){
         for(int i=0; i<visualization.length; ++i){
             visualization[i].drawVisualization();
+        }
+    }
+    private void visualizationNameSetter(AbstractVisualization[] visualization, ServicePoint[] servicePoints){
+        for(int i = 0; i < visualization.length; ++i){
+            visualization[i].setName(servicePoints[i].getName());
         }
     }
     private void curveDrawer(){
