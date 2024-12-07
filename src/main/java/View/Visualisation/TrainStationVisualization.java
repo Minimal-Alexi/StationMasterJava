@@ -5,9 +5,11 @@ import Model.simulation.model.Passenger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -66,6 +68,8 @@ public class TrainStationVisualization extends AbstractVisualization{
                             Duration.millis(maxTime - currentSpeed), // Duration of animation
                             e -> {
                                 passenger.setPosition(centerRailwayX, centerRailwayY);
+                                passenger.clearVisualization();
+                                trainArrived = false;
                             },
                             xValue,
                             yValue
@@ -76,6 +80,7 @@ public class TrainStationVisualization extends AbstractVisualization{
                         drawVisualization();
                         passenger.setPosition(newVal.intValue(), passenger.getY());
                         passenger.drawVisualization();
+                        trainArrived = true;
                     });
 
                     yProperty.addListener((obs, oldVal, newVal) -> {
@@ -83,12 +88,26 @@ public class TrainStationVisualization extends AbstractVisualization{
                         drawVisualization();
                         passenger.setPosition(passenger.getX(), newVal.intValue());
                         passenger.drawVisualization();
+                        trainArrived = true;
                     });
                 }
             }
         }
+        timeline.setOnFinished(event -> {
+            for (int i = 0; i < nrRows; i++) {
+                for (int j = 0; j < nrColumns; j++) {
+                    if (passengerVisualizations[i][j] != null) {
+                        passengerVisualizations[i][j].clearVisualization();
+                        passengerVisualizations[i][j] = null; // Set passenger to null to delete
+                    }
+                }
+            }
+        });
         timeline.play();
-        drawPassengers();
+        Platform.runLater(() -> {
+            drawPassengers();
+            SimulationController.setIsTrainLoading(false);
+        });
     }
     public boolean isTrainArrived(){
         return trainArrived;

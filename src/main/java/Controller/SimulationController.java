@@ -22,6 +22,7 @@ public class SimulationController extends Controller {
     @FXML
     private Label timeLabel,speedLabel;
 
+    private static boolean isTrainLoading;
     private int speed;
     private static long[] simulationData;
     private static final Color backgroundColor = Color.CADETBLUE;
@@ -94,7 +95,7 @@ public class SimulationController extends Controller {
 
         // Empty display of UI
         setTimeLabel(0);
-
+        isTrainLoading = false;
         // For testing different sprites. Adjust accordingly.
         //testDisplayPassengers();
         //testDisplayServicePoints();
@@ -115,6 +116,9 @@ public class SimulationController extends Controller {
     }
     private void mapStateRefresher(){
         visualizationStateUpdater(servicePoints,trainStations);
+        if(isTrainLoading){
+            return;
+        }
         simulationCtx.setFill(backgroundColor);
         simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
         curveDrawer();
@@ -137,15 +141,9 @@ public class SimulationController extends Controller {
         for(int i=0; i<trainStations.length; ++i){
             String displayName;
             if(trainStations[i].isReserved() != trainStationVisualization[i].isTrainArrived()){
-                if(trainStationVisualization[i].isTrainArrived() == true){
+                if(trainStationVisualization[i].isTrainArrived()){
                     trainStationVisualization[i].loadPassengers();
-                    Platform.runLater(()->{
-                        try{
-                            wait(2000-speed);
-                        }catch(InterruptedException e){
-                            application.alertSystem(e);
-                        }
-                    });
+                    isTrainLoading = true;
                 }
                 trainStationVisualization[i].setTrainArrived(trainStations[i].isReserved());
             }
@@ -254,5 +252,8 @@ public class SimulationController extends Controller {
     }
     public void setTrainStations(TrainStation[] trainStations) {
         this.trainStations = trainStations;
+    }
+    public static void setIsTrainLoading(boolean isTrainLoading) {
+        SimulationController.isTrainLoading = isTrainLoading;
     }
 }
