@@ -74,9 +74,11 @@ public class SimulationController extends Controller {
                 // simulationData[1] == Seed, simulationData[0] = Time
                 MyEngine myEngine = new MyEngine(simulationData[1]);
                 myEngine.setSimulationTime(simulationData[0]);
-                visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
-                visualizationNameSetter(trainStationVisualization, myEngine.getTrainStations());
-                mapStateRefresher();
+                Platform.runLater(() -> {
+                    visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
+                    visualizationNameSetter(trainStationVisualization, myEngine.getTrainStations());
+                    mapStateRefresher();
+                });
                 myEngine.run();
             } catch (Exception e) {
                 application.alertSystem(e);
