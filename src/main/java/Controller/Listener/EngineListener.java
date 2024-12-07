@@ -1,19 +1,13 @@
 package Controller.Listener;
 
 import Controller.SimulationController;
-import Model.simulation.model.MyEngine;
 import Model.simulation.model.ServicePoint;
 import Model.simulation.model.TrainStation;
 
-public class EngineConnector implements EngineConnectorInterface {
-    private final MyEngine myEngine;
+public class EngineListener implements EngineListenerInterface {
     private final SimulationController simulationController;
-    public EngineConnector(MyEngine engine, SimulationController controller) {
-        myEngine = engine;
+    public EngineListener(SimulationController controller) {
         simulationController = controller;
-    }
-    public void onSpeedUpdate(int speed) {
-
     }
     public long onTimeUpdate(long time){
         return time;
