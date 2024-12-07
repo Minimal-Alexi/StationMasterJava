@@ -24,7 +24,4 @@ public class ServicePointVisualization extends AbstractVisualization {
         super.graphicsContext.setFill(super.backgroundColor);
         super.graphicsContext.fillOval(x,y,xSize,ySize);
     }
-    public void setName(String name){
-        this.name = name;
-    }
 }
