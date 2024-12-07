@@ -1,6 +1,5 @@
 package View.Visualisation;
 
-import Model.simulation.model.Passenger;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -9,6 +8,7 @@ public class ServicePointVisualization extends AbstractVisualization {
     private final int centerCoordinateX,centerCoordinateY;
     private static final Color color = Color.GOLD;
     private boolean reserved;
+    private PassengerVisualization passengerVisualization;
     public ServicePointVisualization(int x, int y, GraphicsContext graphicsContext) {
         super(x, y, graphicsContext);
         centerCoordinateX = x + xSize / 2;
@@ -41,7 +41,14 @@ public class ServicePointVisualization extends AbstractVisualization {
         this.reserved = reserved;
     }
     private void passengerDraw(){
-        PassengerVisualization passengerVisualization = new PassengerVisualization(x + (xSize - PassengerVisualization.xSize) / 2,y + (ySize - PassengerVisualization.ySize) / 2,graphicsContext);
-        passengerVisualization.drawVisualization();
+        if(isReserved()){
+            if(passengerVisualization == null){
+                passengerVisualization = new PassengerVisualization(x + (xSize - PassengerVisualization.xSize) / 2,y + (ySize - PassengerVisualization.ySize) / 2,graphicsContext);
+            }
+            passengerVisualization.drawVisualization();
+        }
+        else{
+            passengerVisualization = null;
+        }
     }
 }

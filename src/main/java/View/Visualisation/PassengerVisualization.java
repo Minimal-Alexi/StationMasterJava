@@ -31,4 +31,7 @@ public class PassengerVisualization extends AbstractVisualization{
     public void clearVisualization() {
         super.graphicsContext.clearRect(super.x,super.y,xSize,ySize);
     }
+    public void animateImage(){
+
+    }
 }

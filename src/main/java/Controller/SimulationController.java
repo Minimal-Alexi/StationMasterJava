@@ -145,6 +145,7 @@ public class SimulationController extends Controller {
                 displayName = String.format(standardName,trainStations[i].getName(),trainStations[i].getQueueSize());
             }
             trainStationVisualization[i].setName(displayName);
+            trainStationVisualization[i].setPassengerCount(trainStations[i].getQueueSize());
         }
     }
     private void visualizationNameInitializer(AbstractVisualization[] visualization, ServicePoint[] servicePoints){
