@@ -28,6 +28,8 @@ public class SimulationController extends Controller {
     private static long[] simulationData;
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)";
+    private ServicePoint[] servicePoints;
+    private TrainStation[] trainStations;
     private ServicePointVisualization[] servicePointVisualization;
     private TrainStationVisualization[] trainStationVisualization;
     private GraphicsContext simulationCtx;
@@ -176,5 +178,11 @@ public class SimulationController extends Controller {
     }
     public static Color getBackgroundColor() {
         return backgroundColor;
+    }
+    public void setServicePoints(ServicePoint[] servicePoints) {
+        this.servicePoints = servicePoints;
+    }
+    public void setTrainStations(TrainStation[] trainStations) {
+        this.trainStations = trainStations;
     }
 }
