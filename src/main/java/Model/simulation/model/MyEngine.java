@@ -44,9 +44,7 @@ public class MyEngine extends Engine {
             synchronized (this) {
                 try{
                     connector.onUpdate(servicePoints,trainStations);
-                    if(timer - speed != 0){
-                        wait(timer - speed);
-                    }
+                    wait(timer - speed);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }

@@ -60,7 +60,7 @@ public class SimulationController extends Controller {
     }
     private void speedSliderInitialization(){
         speedSlider.setMin(100);
-        speedSlider.setMax(2000);
+        speedSlider.setMax(1950);
         speedSlider.setValue(1000);
         speed = 1000;
         speedLabel.setText(String.format(speedFormat, (float) speed / 1000));
