@@ -11,6 +11,8 @@ import Model.simulation.framework.Event;
 import java.util.ArrayList;
 
 public class MyEngine extends Engine {
+    private static final int timer = 2000;
+    private int speed = 1000;
     private final TrainStation[] trainStations;
     private final ArrivalProcess[] arrivalProcesses;
     private final ServicePoint[] servicePoints;
@@ -35,6 +37,16 @@ public class MyEngine extends Engine {
     protected void initialize() {
         for (ArrivalProcess arrivalProcess : arrivalProcesses) {
             arrivalProcess.generateNextEvent();
+        }
+    }
+    protected void listenerUpdate(){
+        if(connector != null){
+            try{
+                connector.onUpdate(servicePoints,trainStations);
+                wait(timer - speed);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -141,4 +153,9 @@ public class MyEngine extends Engine {
     public TrainStation[] getTrainStations() {
         return trainStations;
     }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
 }

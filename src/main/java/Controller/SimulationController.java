@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Listener.EngineListener;
 import Model.simulation.model.MyEngine;
 import Model.simulation.model.ServicePoint;
 import Model.simulation.model.TrainStation;
@@ -30,6 +31,8 @@ public class SimulationController extends Controller {
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)",
     speedFormat = "Speed: %.2f x";
+    private EngineListener engineListener;
+    private MyEngine myEngine;
     private ServicePoint[] servicePoints;
     private TrainStation[] trainStations;
     private ServicePointVisualization[] servicePointVisualization;
@@ -37,9 +40,20 @@ public class SimulationController extends Controller {
     private GraphicsContext simulationCtx;
 
     public void initialize() {
+        // Creating engine
+        // simulationData[1] == Seed, simulationData[0] = Time
+        myEngine = new MyEngine(simulationData[1]);
+        myEngine.setSimulationTime(simulationData[0]);
+        myEngine.setSpeed(speed);
+
         // Initializing Javafx Elements
         canvasInitializer();
         speedSliderInitialization();
+        // Loading names for servicePoints
+        visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
+        visualizationNameSetter(trainStationVisualization, myEngine.getTrainStations());
+        mapStateRefresher();
+
         // Creating engineThread.
         Thread engineThread = engineThreadCreator();
         // engineThread.start();
@@ -53,6 +67,7 @@ public class SimulationController extends Controller {
         speedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             speed = newValue.intValue();
             speedLabel.setText(String.format(speedFormat, (float) speed / 1000));
+            myEngine.setSpeed(speed);
         });
     }
     private void canvasInitializer() {
@@ -88,15 +103,8 @@ public class SimulationController extends Controller {
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
             try {
-                // simulationData[1] == Seed, simulationData[0] = Time
-                MyEngine myEngine = new MyEngine(simulationData[1]);
-                myEngine.setSimulationTime(simulationData[0]);
-                Platform.runLater(() -> {
-                    visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
-                    visualizationNameSetter(trainStationVisualization, myEngine.getTrainStations());
-                    mapStateRefresher();
-                });
                 myEngine.run();
+                Platform.runLater(this::mapStateRefresher);
             } catch (Exception e) {
                 application.alertSystem(e);
             }
