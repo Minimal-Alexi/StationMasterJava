@@ -54,6 +54,7 @@ public class SimulationController extends Controller {
         // Initial display of station + service points
         visualizationDrawer(servicePointVisualization);
         visualizationDrawer(trainStationVisualization);
+        curveDrawer();
 
         // For testing different sprites. Adjust accordingly.
         testDisplayPassengers();
@@ -108,6 +109,40 @@ public class SimulationController extends Controller {
     private void visualizationDrawer(AbstractVisualization[] visualization){
         for(int i=0; i<visualization.length; ++i){
             visualization[i].drawVisualization();
+        }
+    }
+    private void curveDrawer(){
+        simulationCtx.setStroke(Color.BLACK);
+        simulationCtx.setLineWidth(2);
+        int startPoints[][] = new int[2][2];
+        for(int i = 0 ; i < 2; ++i){
+            startPoints[i][0] = servicePointVisualization[i].centerCoordinateX + 35;
+            startPoints[i][1] = servicePointVisualization[i].centerCoordinateY;
+        }
+        int endPoints[][] = new int[3][2];
+        endPoints[0][0] = 350;
+        endPoints[1][0] = 350;
+        endPoints[2][0] = 350;
+        endPoints[0][1] = 150;
+        endPoints[1][1] = 450;
+        endPoints[2][1] = 750;
+        for(int i=0; i<2; ++i){
+            for(int j=0; j<3; ++j){
+                if(i != 1 || j != 0){
+                    int startX = startPoints[i][0],startY = startPoints[i][1],endX = endPoints[j][0],endY = endPoints[j][1];
+                    int middleX = (startX + endX) / 2,middleY = (startY + endY) / 2;
+                    if(endY > startY){
+                        middleY -= 75;
+                    }
+                    else if(endY < startY){
+                        middleY += 75;
+                    }
+                    simulationCtx.beginPath();
+                    simulationCtx.moveTo(startX,startY);
+                    simulationCtx.bezierCurveTo(startX,startY,middleX,middleY,endX,endY);
+                    simulationCtx.stroke();
+                }
+            }
         }
     }
     public static void setSimulationData(long[] simulationData) {
