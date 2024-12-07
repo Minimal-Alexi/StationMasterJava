@@ -23,9 +23,9 @@
                   <Slider fx:id="speedSlider" />
                </children>
             </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox prefHeight="42.0" prefWidth="349.0" spacing="10.0">
                <children>
-                  <Label fx:id="timeLabel" prefHeight="42.0" prefWidth="205.0" text="Time: ">
+                  <Label fx:id="timeLabel" prefHeight="42.0" prefWidth="364.0" text="Time: ">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>

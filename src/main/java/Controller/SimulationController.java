@@ -27,7 +27,7 @@ public class SimulationController extends Controller {
 
     private static long[] simulationData;
     private static final Color backgroundColor = Color.CADETBLUE;
-    private static final String timeFormat = "%d Days - %d Hours - %d Minutes - %d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)";
+    private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)";
     private ServicePointVisualization[] servicePointVisualization;
     private TrainStationVisualization[] trainStationVisualization;
     private GraphicsContext simulationCtx;
@@ -59,6 +59,9 @@ public class SimulationController extends Controller {
         curveDrawer();
         visualizationDrawer(servicePointVisualization);
         visualizationDrawer(trainStationVisualization);
+
+        // Empty display of UI
+        setTimeLabel(0);
 
         // For testing different sprites. Adjust accordingly.
         //testDisplayPassengers();
@@ -140,6 +143,10 @@ public class SimulationController extends Controller {
                 }
             }
         }
+    }
+    private void setTimeLabel(long time){
+        long days = time / 86400, hours = (time % 86400) / 3600, minutes = (time % 3600) / 60, seconds = time % 60;
+        timeLabel.setText(String.format(timeFormat,days,hours,minutes,seconds));
     }
     private void testDisplayPassengers(){
         for(int i=0; i<10; ++i){
