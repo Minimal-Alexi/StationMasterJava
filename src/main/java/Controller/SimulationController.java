@@ -2,6 +2,7 @@ package Controller;
 
 import Model.simulation.model.MyEngine;
 import Model.simulation.model.ServicePoint;
+import Model.simulation.model.TrainStation;
 import View.Visualisation.*;
 
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class SimulationController extends Controller {
 
     private static long[] simulationData;
     private static final Color backgroundColor = Color.CADETBLUE;
-    private static final String timeFormat = "%d Days - %d Hours - %d Minutes - %d Seconds";
+    private static final String timeFormat = "%d Days - %d Hours - %d Minutes - %d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)";
     private ServicePointVisualization[] servicePointVisualization;
     private TrainStationVisualization[] trainStationVisualization;
     private GraphicsContext simulationCtx;
@@ -116,7 +117,15 @@ public class SimulationController extends Controller {
     }
     private void visualizationNameSetter(AbstractVisualization[] visualization, ServicePoint[] servicePoints){
         for(int i = 0; i < visualization.length; ++i){
-            visualization[i].setName(servicePoints[i].getName());
+            String serviceName = servicePoints[i].getName(), displayName;
+            if(servicePoints[i] instanceof TrainStation && servicePoints[i].isReserved()){
+                TrainStation trainStation = (TrainStation) servicePoints[i];
+                displayName = String.format(stationNameTrain,serviceName,trainStation.getQueueSize(),trainStation.getCurrentCapacity());
+            }
+            else{
+                displayName = String.format(standardName,serviceName,servicePoints[i].getQueueSize());
+            }
+            visualization[i].setName(displayName);
         }
     }
     private void curveDrawer(){
