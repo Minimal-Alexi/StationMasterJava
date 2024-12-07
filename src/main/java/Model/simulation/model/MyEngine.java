@@ -41,11 +41,15 @@ public class MyEngine extends Engine {
     }
     protected void listenerUpdate(){
         if(connector != null){
-            try{
-                connector.onUpdate(servicePoints,trainStations);
-                wait(timer - speed);
-            }catch(InterruptedException e){
-                e.printStackTrace();
+            synchronized (this) {
+                try{
+                    connector.onUpdate(servicePoints,trainStations);
+                    if(timer - speed != 0){
+                        wait(timer - speed);
+                    }
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -104,9 +104,15 @@ public class SimulationController extends Controller {
         Thread engineThread = new Thread(() -> {
             try {
                 myEngine.run();
-                Platform.runLater(this::mapStateRefresher);
+                Platform.runLater(()->{
+                    visualizationNameSetter(servicePointVisualization,servicePoints);
+                    visualizationNameSetter(trainStationVisualization,trainStations);
+                    mapStateRefresher();
+                });
             } catch (Exception e) {
-                application.alertSystem(e);
+                Platform.runLater(() -> {
+                    application.alertSystem(e);
+                });
             }
         });
         engineThread.setDaemon(true);
