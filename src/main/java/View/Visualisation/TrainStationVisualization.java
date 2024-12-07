@@ -11,6 +11,7 @@ public class TrainStationVisualization extends AbstractVisualization{
     public static final int xSizeBuilding = 200 , ySizeBuilding = 200, xSizeRailroad = 100, ySizeRailroad = 200, distanceBuildingRailroad = 25
             , xSize = xSizeBuilding + distanceBuildingRailroad + xSizeRailroad, ySize = 200;
     private boolean trainArrived;
+    private String name = "Loading Name from Simulation";
     public TrainStationVisualization(int x, int y, GraphicsContext graphicsContext){
         super(x, y, graphicsContext);
         this.trainArrived = false;
@@ -35,5 +36,8 @@ public class TrainStationVisualization extends AbstractVisualization{
     @Override
     public void clearVisualization() {
         graphicsContext.clearRect(x,y,xSize * 2 + 25,ySize * 2);
+    }
+    public void setName(String name){
+        this.name = name;
     }
 }
