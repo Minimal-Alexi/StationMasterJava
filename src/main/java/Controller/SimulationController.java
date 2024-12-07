@@ -162,8 +162,8 @@ public class SimulationController extends Controller {
         simulationCtx.setLineWidth(2);
         int[][] startPoints = new int[2][2];
         for(int i = 0 ; i < 2; ++i){
-            startPoints[i][0] = servicePointVisualization[i].centerCoordinateX + 35;
-            startPoints[i][1] = servicePointVisualization[i].centerCoordinateY;
+            startPoints[i][0] = servicePointVisualization[i].getCenterCoordinateX() + 35;
+            startPoints[i][1] = servicePointVisualization[i].getCenterCoordinateY();
         }
         int[][] endPoints = new int[3][2];
         endPoints[0][0] = 350;
@@ -195,6 +195,7 @@ public class SimulationController extends Controller {
         long days = time / 86400, hours = (time % 86400) / 3600, minutes = (time % 3600) / 60, seconds = time % 60;
         timeLabel.setText(String.format(timeFormat,days,hours,minutes,seconds));
     }
+ /*
     private void testDisplayPassengers(){
         for(int i=0; i<10; ++i){
             PassengerVisualization passengerVisualization = new PassengerVisualization(i * PassengerVisualization.xSize,0,simulationCtx);
@@ -216,6 +217,7 @@ public class SimulationController extends Controller {
             trainStationVisualization.drawVisualization();
         }
     }
+    */
     public static void setSimulationData(long[] simulationData) {
         SimulationController.simulationData = simulationData;
     }
