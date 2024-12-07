@@ -52,7 +52,6 @@ public class SimulationController extends Controller {
         // Loading names for servicePoints
         visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
         visualizationNameSetter(trainStationVisualization, myEngine.getTrainStations());
-        mapStateRefresher();
 
         // Creating engineThread.
         Thread engineThread = engineThreadCreator();
@@ -114,6 +113,8 @@ public class SimulationController extends Controller {
         return engineThread;
     }
     private void mapStateRefresher(){
+        visualizationNameSetter(servicePointVisualization,servicePoints);
+        visualizationNameSetter(trainStationVisualization,trainStations);
         simulationCtx.setFill(backgroundColor);
         simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
         curveDrawer();
