@@ -13,7 +13,7 @@ public abstract class Engine {
     public Engine() {
         eventList = new EventList();
     }
-    public void setConnector(EngineListener connector) {
+    public void setEngineListener(EngineListener connector) {
         this.connector = connector;
     }
     public void setSimulationTime(long simulationTime) {

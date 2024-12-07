@@ -14,10 +14,6 @@ import javafx.application.Platform;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 public class SimulationController extends Controller {
     @FXML
     private Slider speedSlider;
@@ -40,11 +36,15 @@ public class SimulationController extends Controller {
     private GraphicsContext simulationCtx;
 
     public void initialize() {
+        // Creating listener
+        engineListener = new EngineListener(this);
+
         // Creating engine
         // simulationData[1] == Seed, simulationData[0] = Time
         myEngine = new MyEngine(simulationData[1]);
         myEngine.setSimulationTime(simulationData[0]);
         myEngine.setSpeed(speed);
+        myEngine.setEngineListener(engineListener);
 
         // Initializing Javafx Elements
         canvasInitializer();
@@ -56,7 +56,7 @@ public class SimulationController extends Controller {
 
         // Creating engineThread.
         Thread engineThread = engineThreadCreator();
-        // engineThread.start();
+        engineThread.start();
     }
     private void speedSliderInitialization(){
         speedSlider.setMin(100);
