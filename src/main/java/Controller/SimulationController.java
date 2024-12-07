@@ -67,6 +67,7 @@ public class SimulationController extends Controller {
             speed = newValue.intValue();
             speedLabel.setText(String.format(speedFormat, (float) speed / 1000));
             myEngine.setSpeed(speed);
+            PassengerVisualization.setCurrentSpeed(speed);
         });
     }
     private void canvasInitializer() {
@@ -136,6 +137,9 @@ public class SimulationController extends Controller {
         for(int i=0; i<trainStations.length; ++i){
             String displayName;
             if(trainStations[i].isReserved() != trainStationVisualization[i].isTrainArrived()){
+                if(trainStationVisualization[i].isTrainArrived() == true){
+                    trainStationVisualization[i].loadPassengers();
+                }
                 trainStationVisualization[i].setTrainArrived(trainStations[i].isReserved());
             }
             if(trainStationVisualization[i].isTrainArrived()){

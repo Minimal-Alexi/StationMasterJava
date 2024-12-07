@@ -11,7 +11,7 @@ public class TrainStationVisualization extends AbstractVisualization{
     private static final Color color = Color.GOLD;
     private static final int xSizeBuilding = 200 , ySizeBuilding = 200, xSizeRailroad = 100, ySizeRailroad = 200, distanceBuildingRailroad = 25
             , xSize = xSizeBuilding + distanceBuildingRailroad + xSizeRailroad, ySize = 200
-            ,gridSquaresSize = PassengerVisualization.xSize,nrRows = xSizeBuilding / gridSquaresSize
+            ,gridSquaresSize = PassengerVisualization.getxSize(),nrRows = xSizeBuilding / gridSquaresSize
             ,nrColumns = ySizeBuilding / gridSquaresSize, maxPassenger = nrRows * nrColumns;
     private boolean trainArrived;
     public int passengerCount;
@@ -57,7 +57,8 @@ public class TrainStationVisualization extends AbstractVisualization{
         for(int i = 0; i < nrRows; i++){
             for(int j = 0; j < nrColumns; j++){
                 if(passengerVisualizations[i][j]!= null){
-
+                    passengerVisualizations[i][j].animateImage(centerRailwayX,centerRailwayY);
+                    passengerVisualizations[i][j] = null;
                 }
             }
         }

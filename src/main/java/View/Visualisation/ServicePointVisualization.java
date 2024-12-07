@@ -43,7 +43,7 @@ public class ServicePointVisualization extends AbstractVisualization {
     private void passengerDraw(){
         if(isReserved()){
             if(passengerVisualization == null){
-                passengerVisualization = new PassengerVisualization(x + (xSize - PassengerVisualization.xSize) / 2,y + (ySize - PassengerVisualization.ySize) / 2,graphicsContext);
+                passengerVisualization = new PassengerVisualization(x + (xSize - PassengerVisualization.getxSize()) / 2,y + (ySize - PassengerVisualization.getySize()) / 2,graphicsContext);
             }
             passengerVisualization.drawVisualization();
         }
