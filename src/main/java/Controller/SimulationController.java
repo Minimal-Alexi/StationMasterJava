@@ -50,8 +50,8 @@ public class SimulationController extends Controller {
         canvasInitializer();
         speedSliderInitialization();
         // Loading names for servicePoints
-        visualizationNameSetter(servicePointVisualization, myEngine.getServicePoints());
-        visualizationNameSetter(trainStationVisualization, myEngine.getTrainStations());
+        visualizationNameInitializer(servicePointVisualization, myEngine.getServicePoints());
+        visualizationNameInitializer(trainStationVisualization, myEngine.getTrainStations());
 
         // Creating engineThread.
         Thread engineThread = engineThreadCreator();
@@ -59,7 +59,7 @@ public class SimulationController extends Controller {
     }
     private void speedSliderInitialization(){
         speedSlider.setMin(100);
-        speedSlider.setMax(1950);
+        speedSlider.setMax(1999);
         speedSlider.setValue(1000);
         speed = 1000;
         speedLabel.setText(String.format(speedFormat, (float) speed / 1000));
@@ -113,8 +113,7 @@ public class SimulationController extends Controller {
         return engineThread;
     }
     private void mapStateRefresher(){
-        visualizationNameSetter(servicePointVisualization,servicePoints);
-        visualizationNameSetter(trainStationVisualization,trainStations);
+        visualizationStateUpdater(servicePoints,trainStations);
         simulationCtx.setFill(backgroundColor);
         simulationCtx.fillRect(0, 0, simulationCanvas.getWidth(), simulationCanvas.getHeight());
         curveDrawer();
@@ -126,7 +125,26 @@ public class SimulationController extends Controller {
             visualization[i].drawVisualization();
         }
     }
-    private void visualizationNameSetter(AbstractVisualization[] visualization, ServicePoint[] servicePoints){
+    private void visualizationStateUpdater(ServicePoint[] servicePoints, TrainStation[] trainStations){
+        for(int i=0; i<servicePoints.length; ++i){
+            String displayName = String.format(standardName,servicePoints[i].getName(),servicePoints[i].getQueueSize());
+            servicePointVisualization[i].setName(displayName);
+        }
+        for(int i=0; i<trainStations.length; ++i){
+            String displayName;
+            if(trainStations[i].isReserved() != trainStationVisualization[i].isTrainArrived()){
+                trainStationVisualization[i].setTrainArrived(trainStations[i].isReserved());
+            }
+            if(trainStationVisualization[i].isTrainArrived()){
+                displayName = String.format(stationNameTrain,trainStations[i].getName(),trainStations[i].getQueueSize(),trainStations[i].getCurrentCapacity());
+            }
+            else{
+                displayName = String.format(standardName,trainStations[i].getName(),trainStations[i].getQueueSize());
+            }
+            trainStationVisualization[i].setName(displayName);
+        }
+    }
+    private void visualizationNameInitializer(AbstractVisualization[] visualization, ServicePoint[] servicePoints){
         for(int i = 0; i < visualization.length; ++i){
             String serviceName = servicePoints[i].getName(), displayName;
             if(servicePoints[i] instanceof TrainStation && servicePoints[i].isReserved()){
@@ -204,10 +222,13 @@ public class SimulationController extends Controller {
     public static Color getBackgroundColor() {
         return backgroundColor;
     }
+    public void onTimeUpdate(long time){
+        Platform.runLater(()->{
+            setTimeLabel(time);
+        });
+    }
     public void onUpdate(){
         Platform.runLater(()->{
-            visualizationNameSetter(servicePointVisualization,servicePoints);
-            visualizationNameSetter(trainStationVisualization,trainStations);
             mapStateRefresher();
         });
     }

@@ -26,6 +26,7 @@ public abstract class Engine {
         while (simulate()) {
             System.out.printf("\n%sA-phase:%s time is %d%n\n", RED, WHITE, currentTime());
             Clock.getInstance().setTime(currentTime());
+            listenerTimeUpdate(currentTime());
 
             System.out.printf("%sB-phase:%s ", RED, WHITE);
             runBEvents();
@@ -53,6 +54,8 @@ public abstract class Engine {
         }
     }
 
+
+    protected abstract void listenerTimeUpdate(long currentTime);
     protected abstract void listenerUpdate();
     protected abstract void initialize();
     protected abstract void runEvent(Event e);

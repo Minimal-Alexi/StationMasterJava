@@ -39,6 +39,13 @@ public class MyEngine extends Engine {
             arrivalProcess.generateNextEvent();
         }
     }
+
+    protected void listenerTimeUpdate(long currentTime) {
+        if(connector != null) {
+            connector.onTimeUpdate(currentTime);
+        }
+    }
+
     protected void listenerUpdate(){
         if(connector != null){
             synchronized (this) {

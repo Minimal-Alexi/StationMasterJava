@@ -9,8 +9,8 @@ public class EngineListener implements EngineListenerInterface {
     public EngineListener(SimulationController controller) {
         simulationController = controller;
     }
-    public long onTimeUpdate(long time){
-        return time;
+    public void onTimeUpdate(long time){
+        simulationController.onTimeUpdate(time);
     }
     public void onUpdate(ServicePoint[] servicePoints, TrainStation[] trainStations){
         simulationController.setServicePoints(servicePoints);

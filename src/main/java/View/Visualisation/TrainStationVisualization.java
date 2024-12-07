@@ -38,4 +38,7 @@ public class TrainStationVisualization extends AbstractVisualization{
     public void clearVisualization() {
         graphicsContext.clearRect(x,y,xSize * 2 + 25,ySize * 2);
     }
+    public boolean isTrainArrived(){
+        return trainArrived;
+    }
 }
