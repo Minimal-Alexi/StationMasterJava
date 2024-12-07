@@ -23,11 +23,13 @@ public class SimulationController extends Controller {
     @FXML
     private Canvas simulationCanvas;
     @FXML
-    private Label timeLabel;
+    private Label timeLabel,speedLabel;
 
+    private int speed;
     private static long[] simulationData;
     private static final Color backgroundColor = Color.CADETBLUE;
-    private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)";
+    private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)",
+    speedFormat = "Speed: %.2f x";
     private ServicePoint[] servicePoints;
     private TrainStation[] trainStations;
     private ServicePointVisualization[] servicePointVisualization;
@@ -35,10 +37,23 @@ public class SimulationController extends Controller {
     private GraphicsContext simulationCtx;
 
     public void initialize() {
-        //Create Engine
+        // Initializing Javafx Elements
         canvasInitializer();
+        speedSliderInitialization();
+        // Creating engineThread.
         Thread engineThread = engineThreadCreator();
-        engineThread.start();
+        // engineThread.start();
+    }
+    private void speedSliderInitialization(){
+        speedSlider.setMin(100);
+        speedSlider.setMax(2000);
+        speedSlider.setValue(1000);
+        speed = 1000;
+        speedLabel.setText(String.format(speedFormat, (float) speed / 1000));
+        speedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            speed = newValue.intValue();
+            speedLabel.setText(String.format(speedFormat, (float) speed / 1000));
+        });
     }
     private void canvasInitializer() {
         //simulationCtx init

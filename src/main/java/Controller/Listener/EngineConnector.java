@@ -5,10 +5,10 @@ import Model.simulation.model.MyEngine;
 import Model.simulation.model.ServicePoint;
 import Model.simulation.model.TrainStation;
 
-public class EngineListener  implements EngineListenerInterface{
+public class EngineConnector implements EngineConnectorInterface {
     private final MyEngine myEngine;
     private final SimulationController simulationController;
-    public EngineListener(MyEngine engine, SimulationController controller) {
+    public EngineConnector(MyEngine engine, SimulationController controller) {
         myEngine = engine;
         simulationController = controller;
     }
