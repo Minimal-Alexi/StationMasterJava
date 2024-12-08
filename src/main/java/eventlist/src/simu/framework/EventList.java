@@ -1,35 +1,29 @@
-package simulation.framework;
-
-import simulation.filewriter.CSVWriter;
+package eventlist.src.simu.framework;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class EventList {
     private PriorityQueue<Event> evenList;
-    private CSVWriter csvWriter;
 
     public EventList() {
         evenList = new PriorityQueue<>();
-
-        csvWriter = new CSVWriter();
     }
 
     public void add(Event e) {
-        System.out.printf(" Adding to the event list %s %d%n\n", e.getType(), e.getTime());
+        System.out.printf(" Adding to the event list %s %.2f\n", e.getType(), e.getTime());
         evenList.add(e);
-        csvWriter.writeEvent(e);
     }
 
     public Event remove() {
         if (evenList.isEmpty())
             return null;
 
-        System.out.printf(" Removing from the event list %s %d%n", evenList.peek().getType(), evenList.peek().getTime());
+        System.out.printf(" Removing from the event list %s %.2f", evenList.peek().getType(), evenList.peek().getTime());
         return evenList.remove();
     }
 
-    public long getNextEventTime() {
+    public double getNextEventTime() {
         if (evenList.isEmpty())
             return 0;
         return evenList.peek().getTime();
