@@ -8,18 +8,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class CSVWriter {
-    private String simulationFileName;
-    private String resultFileName;
+    private static String simulationFileName;
+    private static String resultFileName;
+    private static long seed;
 
     private static boolean firstWrite = true;
     private static boolean firstTicketResultWrite = true;
     private static boolean firstStationResultWrite = true;
 
-    public CSVWriter() {
+    public CSVWriter() {}
+
+    public CSVWriter(long seed) {
+        CSVWriter.seed = seed;
+
         String baseDirectory = System.getProperty("user.dir");
 
-        simulationFileName = Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files", "simulation.csv").toString();
-        resultFileName = Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files", "result.csv").toString();
+        simulationFileName = Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files", seed + "simulation.csv").toString();
+        resultFileName = Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files", seed + "result.csv").toString();
 
         createDirectoryIfNotExists(Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files").toString());
 

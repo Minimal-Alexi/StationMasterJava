@@ -34,7 +34,7 @@ public class MyEngine extends Engine {
         arrivalProcesses[2] = new ArrivalProcess(new Normal(1800, 120,seed), eventList, EventType.B8_TRAIN1_ARRIVAL);
         arrivalProcesses[3] = new ArrivalProcess(new Normal(1500, 600,seed), eventList, EventType.B9_TRAIN2_ARRIVAL);
         arrivalProcesses[4] = new ArrivalProcess(new Normal(540, 90,seed), eventList, EventType.B10_TRAIN3_ARRIVAL);
-        csvWriter = new CSVWriter();
+        csvWriter = new CSVWriter(seed);
     }
 
     protected void initialize() {
