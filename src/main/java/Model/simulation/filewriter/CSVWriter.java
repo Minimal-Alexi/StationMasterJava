@@ -18,10 +18,10 @@ public class CSVWriter {
     public CSVWriter() {
         String baseDirectory = System.getProperty("user.dir");
 
-        simulationFileName = Paths.get(baseDirectory, "src", "main", "java", "simulation", "files", "simulation.csv").toString();
-        resultFileName = Paths.get(baseDirectory, "src", "main", "java", "simulation", "files", "result.csv").toString();
+        simulationFileName = Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files", "simulation.csv").toString();
+        resultFileName = Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files", "result.csv").toString();
 
-        createDirectoryIfNotExists(Paths.get(baseDirectory, "src", "main", "java", "simulation", "files").toString());
+        createDirectoryIfNotExists(Paths.get(baseDirectory, "src", "main", "java", "Model", "simulation", "files").toString());
 
         if (firstWrite) {
             write();
