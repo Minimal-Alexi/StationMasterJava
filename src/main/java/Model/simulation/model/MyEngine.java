@@ -12,6 +12,34 @@ import java.util.ArrayList;
 
 public class MyEngine extends Engine {
     private static final int timer = 2000;
+    private static final long[] defaultValues = new long[15];
+    static {
+        // Travel time default values
+        defaultValues[0] = 1800;
+        defaultValues[1] = 1500;
+        defaultValues[2] = 540;
+
+        // Loading time default values of the trains
+        defaultValues[3] = 120;
+        defaultValues[4] = 120;
+        defaultValues[5] = 60;
+
+        // Default train capacity values
+        defaultValues[6] = 70;
+        defaultValues[7] = 30;
+        defaultValues[8] = 80;
+        defaultValues[9] = 50;
+        defaultValues[10] = 100;
+        defaultValues[11] = 25;
+
+        // Passenger arrival default values
+        defaultValues[12] = 10;
+        defaultValues[13] = 10;
+
+        // Passenger train-to-metro ratio
+        defaultValues[14] = 30;
+    }
+
     private int speed = 1000;
     private final TrainStation[] trainStations;
     private final ArrivalProcess[] arrivalProcesses;
@@ -31,24 +59,30 @@ public class MyEngine extends Engine {
         arrivalProcesses[2] = new ArrivalProcess(new Normal(1800, 120), eventList, EventType.B8_TRAIN1_ARRIVAL);
         arrivalProcesses[3] = new ArrivalProcess(new Normal(1500, 600), eventList, EventType.B9_TRAIN2_ARRIVAL);
         arrivalProcesses[4] = new ArrivalProcess(new Normal(540, 90), eventList, EventType.B10_TRAIN3_ARRIVAL);
+        Passenger.setTrainMetroRatio((double) defaultValues[12] / 100);
     }
     public MyEngine(long[] simulationSettings) {
         super();
         long seed = simulationSettings[1];
         // simulationData[1] == Seed
+        for(int i = 2; i < simulationSettings.length; i++) {
+            if(simulationSettings[i] == 0)simulationSettings[i] = defaultValues[i-2];
+            System.out.println(simulationSettings[i]);
+        }
         servicePoints = new ServicePoint[2];
         trainStations = new TrainStation[3];
         arrivalProcesses = new ArrivalProcess[5];
         servicePoints[0] = new ServicePoint("Ticket Check 1", new Normal(10, 5,seed), eventList, EventType.B3_TICKET_CHECK_FINISH);
         servicePoints[1] = new ServicePoint("Ticket Check 2", new Normal(10, 5,seed), eventList, EventType.B4_TICKET_CHECK_FINISH);
-        trainStations[0] = new TrainStation("Train Station 1", new Normal(120, 60,seed), new Normal(70, 30,seed), eventList, EventType.B5_TRAIN1_DEPARTURE);
-        trainStations[1] = new TrainStation("Train Station 2", new Normal(120, 60,seed), new Normal(80, 50,seed), eventList, EventType.B6_TRAIN2_DEPARTURE);
-        trainStations[2] = new TrainStation("Metro Station", new Normal(60, 20,seed), new Normal(100, 25,seed), eventList, EventType.B7_TRAIN3_DEPARTURE);
-        arrivalProcesses[0] = new ArrivalProcess(new Negexp(10), eventList, EventType.B1_PASSENGER_ARRIVAL);
-        arrivalProcesses[1] = new ArrivalProcess(new Negexp(10), eventList, EventType.B2_PASSENGER_ARRIVAL);
-        arrivalProcesses[2] = new ArrivalProcess(new Normal(1800, 120,seed), eventList, EventType.B8_TRAIN1_ARRIVAL);
-        arrivalProcesses[3] = new ArrivalProcess(new Normal(1500, 600,seed), eventList, EventType.B9_TRAIN2_ARRIVAL);
-        arrivalProcesses[4] = new ArrivalProcess(new Normal(540, 90,seed), eventList, EventType.B10_TRAIN3_ARRIVAL);
+        trainStations[0] = new TrainStation("Train Station 1", new Normal(simulationSettings[5], 60,seed), new Normal(simulationSettings[8], simulationSettings[9],seed), eventList, EventType.B5_TRAIN1_DEPARTURE);
+        trainStations[1] = new TrainStation("Train Station 2", new Normal(simulationSettings[6], 60,seed), new Normal(simulationSettings[10], simulationSettings[11],seed), eventList, EventType.B6_TRAIN2_DEPARTURE);
+        trainStations[2] = new TrainStation("Metro Station", new Normal(simulationSettings[7], 20,seed), new Normal(simulationSettings[12], simulationSettings[13],seed), eventList, EventType.B7_TRAIN3_DEPARTURE);
+        arrivalProcesses[0] = new ArrivalProcess(new Negexp(simulationSettings[14]), eventList, EventType.B1_PASSENGER_ARRIVAL);
+        arrivalProcesses[1] = new ArrivalProcess(new Negexp(simulationSettings[15]), eventList, EventType.B2_PASSENGER_ARRIVAL);
+        arrivalProcesses[2] = new ArrivalProcess(new Normal(simulationSettings[2], 120,seed), eventList, EventType.B8_TRAIN1_ARRIVAL);
+        arrivalProcesses[3] = new ArrivalProcess(new Normal(simulationSettings[3], 600,seed), eventList, EventType.B9_TRAIN2_ARRIVAL);
+        arrivalProcesses[4] = new ArrivalProcess(new Normal(simulationSettings[4], 90,seed), eventList, EventType.B10_TRAIN3_ARRIVAL);
+        Passenger.setTrainMetroRatio((double) simulationSettings[16] / 100);
     }
 
     protected void initialize() {

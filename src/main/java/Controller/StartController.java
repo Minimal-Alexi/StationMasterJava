@@ -43,23 +43,30 @@ public class StartController extends Controller {
         passengerSettingInitializer();
 
         startButton.setOnAction(event -> {
-            long[] simulationData = new long[15];
+            long[] simulationData = new long[17];
             // Adding general settings
             simulationData[0] = getTotalTime(dayField,hourField,minuteField,secondField);
             simulationData[1] = getSeed();
+            // Travel time of the trains
             simulationData[2] = getTotalTime(trainDayField1,trainHourField1,trainMinuteField1,trainSecondField1);
             simulationData[3] = getTotalTime(trainDayField2,trainHourField2,trainMinuteField2,trainSecondField2);
             simulationData[4] = getTotalTime(trainDayField3,trainHourField3,trainMinuteField3,trainSecondField3);
+            // Loading time of the trains
             simulationData[5] = getTotalTime(null,null,minuteLoaderTimeField1,secondLoaderTimeField1);
             simulationData[6] = getTotalTime(null,null,minuteLoaderTimeField2,secondLoaderTimeField2);
             simulationData[7] = getTotalTime(null,null,minuteLoaderTimeField3,secondLoaderTimeField3);
+            // Capacity of the trains
             simulationData[8] = parseLongWithDefault(averageTrainCapacityField1.getText());
             simulationData[9] = parseLongWithDefault(variabilityTrainCapacityField1.getText());
             simulationData[10] = parseLongWithDefault(averageTrainCapacityField2.getText());
             simulationData[11] = parseLongWithDefault(variabilityTrainCapacityField2.getText());
             simulationData[12] = parseLongWithDefault(averageTrainCapacityField3.getText());
-            simulationData[13] = parseLongWithDefault(generationMean1.getText());
-            simulationData[14] = parseLongWithDefault(generationMean2.getText());
+            simulationData[13] = parseLongWithDefault(variabilityTrainCapacityField3.getText());
+            //Passenger generation
+            simulationData[14] = parseLongWithDefault(generationMean1.getText());
+            simulationData[15] = parseLongWithDefault(generationMean2.getText());
+            //Passenger metro-to-train ratio.
+            simulationData[16] = (long) trainToMetroRatioSlider.getValue();
             SimulationController.setSimulationData(simulationData);
             application.showSimulationView();
         });
