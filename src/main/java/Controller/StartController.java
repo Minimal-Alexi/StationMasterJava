@@ -43,9 +43,26 @@ public class StartController extends Controller {
         passengerSettingInitializer();
 
         startButton.setOnAction(event -> {
-            long[] simulationData = new long[2];
-            simulationData[0] = getTotalTime();
+            long[] simulationData = new long[15];
+            // Adding general settings
+            simulationData[0] = getTotalTime(dayField,hourField,minuteField,secondField);
             simulationData[1] = getSeed();
+            simulationData[2] = getTotalTime(trainDayField1,trainHourField1,trainMinuteField1,trainSecondField1);
+            simulationData[3] = getTotalTime(trainDayField2,trainHourField2,trainMinuteField2,trainSecondField2);
+            simulationData[4] = getTotalTime(trainDayField3,trainHourField3,trainMinuteField3,trainSecondField3);
+            simulationData[5] = getTotalTime(null,null,minuteLoaderTimeField1,secondLoaderTimeField1);
+            simulationData[6] = getTotalTime(null,null,minuteLoaderTimeField2,secondLoaderTimeField2);
+            simulationData[7] = getTotalTime(null,null,minuteLoaderTimeField3,secondLoaderTimeField3);
+            simulationData[8] = Long.parseLong(averageTrainCapacityField1.getText());
+            simulationData[9] = Long.parseLong(variabilityTrainCapacityField1.getText());
+            simulationData[10] = Long.parseLong(averageTrainCapacityField2.getText());
+            simulationData[11] = Long.parseLong(variabilityTrainCapacityField2.getText());
+            simulationData[12] = Long.parseLong(averageTrainCapacityField3.getText());
+            simulationData[13] = Long.parseLong(generationMean1.getText());
+            simulationData[14] = Long.parseLong(generationMean2.getText());
+            for(int i = 0; i < 15; ++i){
+                System.out.println(simulationData[i]);
+            }
             SimulationController.setSimulationData(simulationData);
             application.showSimulationView();
         });
@@ -111,13 +128,13 @@ public class StartController extends Controller {
             }));
         }
     }
-    private long getTotalTime(){
+    private long getTotalTime(TextField dayField, TextField hourField, TextField minuteField, TextField secondField) {
         long total = 0;
-        if(!dayField.getText().isEmpty()){
+        if(dayField != null && !dayField.getText().isEmpty()){
             total += (long) Integer.parseInt(dayField.getText()) * 24 * 60 * 60;
 
         }
-        if(!hourField.getText().isEmpty()){
+        if(dayField != null && !hourField.getText().isEmpty()){
             total += (long) Integer.parseInt(hourField.getText()) * 60 * 60;
         }
         if(!minuteField.getText().isEmpty()){
@@ -126,7 +143,6 @@ public class StartController extends Controller {
         if(!secondField.getText().isEmpty()){
             total += Long.parseLong(secondField.getText());
         }
-        if(total == 0) return 10000L;
         return total;
     }
     private long getSeed(){
