@@ -105,6 +105,9 @@ public class SimulationController extends Controller {
         Thread engineThread = new Thread(() -> {
             try {
                 myEngine.run();
+                Platform.runLater(() -> {
+                   application.showResultView();
+                });
             } catch (Exception e) {
                 Platform.runLater(() -> {
                     application.alertSystem(e);
