@@ -24,19 +24,19 @@
 .button {
     -fx-font-size: 14px;
     -fx-padding: 10px 20px;
-    -fx-background-color: #3e75a8;
+    -fx-background-color: #00CA4E;
     -fx-text-fill: white;
     -fx-background-radius: 5px;
 }
 
 .button:hover {
-    -fx-background-color: #005bb5;
+    -fx-background-color: #009E3E;
 }
 
 #quitButton {
-    -fx-background-color: #ac1717;
+    -fx-background-color: #FF605C;
 }
 
 #quitButton:hover {
-    -fx-background-color: #ac1717;
+    -fx-background-color: #8B1313;
 }
