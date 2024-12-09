@@ -33,6 +33,7 @@ public class SimulationController extends Controller {
         //Create Engine
         canvasInitializer();
         Thread engineThread = engineThreadCreator();
+        engineThread.run();
     }
     private void canvasInitializer() {
         simulationCtx = simulationCanvas.getGraphicsContext2D();
@@ -53,7 +54,10 @@ public class SimulationController extends Controller {
                 ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
                 scheduler.schedule(() -> {
                     // Update the UI after the delay
-                    Platform.runLater(() -> application.showResultView(simulationResults));
+                    Platform.runLater(() -> {
+                        ResultController.setResults(simulationResults);
+                        application.showResultView();
+                    });
                     scheduler.shutdown();
                 }, 5, TimeUnit.SECONDS);
             } catch (Exception e) {

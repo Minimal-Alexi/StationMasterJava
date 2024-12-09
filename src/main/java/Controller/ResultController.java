@@ -32,7 +32,7 @@ public class ResultController extends Controller {
     @FXML
     private Button quitButton;
 
-    private String[] results;
+    private static String[] results;
 
     public void initialize() {
         // Retrieve the simulation engine instance
@@ -49,7 +49,7 @@ public class ResultController extends Controller {
 //        totalPassengersMetro.setText(results[6]);
 //        totalServicedMetro.setText(results[7]);
 //        avgLoadTimeMetro.setText(results[8]);
-
+        updateLabels();
         // Set the rerun button action
         rerunButton.setOnAction(event -> application.showStartView());
         // Set the quit button action
@@ -59,9 +59,8 @@ public class ResultController extends Controller {
         });
     }
 
-    public void setResults(String[] results) {
-        this.results = results;
-        updateLabels();
+    public static void setResults(String[] results) {
+        ResultController.results = results;
     }
 
     private void updateLabels() {
