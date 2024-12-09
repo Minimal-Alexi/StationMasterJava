@@ -7,6 +7,7 @@ import Model.simulation.framework.ArrivalProcess;
 import Model.simulation.framework.Clock;
 import Model.simulation.framework.Engine;
 import Model.simulation.framework.Event;
+import Model.simulation.filewriter.CSVWriter;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,8 @@ public class MyEngine extends Engine {
     private final TrainStation[] trainStations;
     private final ArrivalProcess[] arrivalProcesses;
     private final ServicePoint[] servicePoints;
-    public MyEngine() {
+    private final CSVWriter csvWriter;
+    public MyEngine(){
         super();
         servicePoints = new ServicePoint[2];
         trainStations = new TrainStation[3];
@@ -83,6 +85,7 @@ public class MyEngine extends Engine {
         arrivalProcesses[3] = new ArrivalProcess(new Normal(simulationSettings[3], 600,seed), eventList, EventType.B9_TRAIN2_ARRIVAL);
         arrivalProcesses[4] = new ArrivalProcess(new Normal(simulationSettings[4], 90,seed), eventList, EventType.B10_TRAIN3_ARRIVAL);
         Passenger.setTrainMetroRatio((double) simulationSettings[16] / 100);
+        csvWriter = new CSVWriter(seed);
     }
 
     protected void initialize() {
@@ -189,12 +192,15 @@ public class MyEngine extends Engine {
         System.out.printf("\nSimulation ended at %d%n", Clock.getInstance().getTime());
         for (ServicePoint sp : servicePoints) {
             System.out.printf("Total passengers at %s: %d\nTotal passengers serviced: %d\nAverage service time: %.2f\n\n", sp.getName(), sp.getQueueSize(), sp.getCustomerServiced(), sp.getMeanServiceTime());
+            csvWriter.writeResultTicketCheck(sp.getName(), sp.getQueueSize(), sp.getCustomerServiced(), sp.getMeanServiceTime());
         }
         for (TrainStation st : trainStations) {
             System.out.printf("Total passengers at %s: %d\nTotal passengers serviced: %d\nAverage station load time: %.2f\n"
                     + "%d trains stopped at the station, with an average capacity of: %.2f \nAverage train travel time is: %.2f with an average loaded capacity of: %.2f \n\n",
                     st.getName(), st.getQueueSize(), st.getCustomerServiced(), st.getMeanServiceTime(), st.getTotalTrains(), st.getMeanTrainCapacity(),
                     st.getMeanTravelTime(),st.getMeanLoadedCapacity());
+            csvWriter.writeResultTrainStation(st.getName(), st.getQueueSize(), st.getCustomerServiced(), st.getMeanServiceTime(), st.getTotalTrains(),
+                    st.getMeanTrainCapacity(), st.getMeanTravelTime(), st.getMeanLoadedCapacity());
         }
     }
 
