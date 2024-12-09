@@ -3,20 +3,40 @@ package simulation.filewriter;
 import simulation.framework.Event;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class CSVWriter {
-    private String simulationFileName = "C:\\school_work\\oop\\StationMasterJava\\src\\main\\java\\simulation\\filewriter\\simulation.csv";
-    private String resultFileName = "C:\\school_work\\oop\\StationMasterJava\\src\\main\\java\\simulation\\filewriter\\result.csv";
-    private FileWriter fileWriter;
+    private String simulationFileName;
+    private String resultFileName;
 
     private static boolean firstWrite = true;
     private static boolean firstTicketResultWrite = true;
     private static boolean firstStationResultWrite = true;
 
     public CSVWriter() {
+        String baseDirectory = System.getProperty("user.dir");
+
+        simulationFileName = Paths.get(baseDirectory, "src", "main", "java", "simulation", "files", "simulation.csv").toString();
+        resultFileName = Paths.get(baseDirectory, "src", "main", "java", "simulation", "files", "result.csv").toString();
+
+        createDirectoryIfNotExists(Paths.get(baseDirectory, "src", "main", "java", "simulation", "files").toString());
+
         if (firstWrite) {
             write();
             firstWrite = false;
+        }
+    }
+
+    private void createDirectoryIfNotExists(String directoryPath) {
+        Path path = Paths.get(directoryPath);
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
