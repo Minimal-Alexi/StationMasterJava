@@ -42,7 +42,8 @@ public class SimulationController extends Controller {
 
         // Creating engine
         // simulationData[1] == Seed, simulationData[0] = Time
-        myEngine = new MyEngine(simulationData[1]);
+        myEngine = new MyEngine(simulationData);
+        if(simulationData[0] == 0) simulationData[0] = 10000L;
         myEngine.setSimulationTime(simulationData[0]);
         myEngine.setSpeed(speed);
         myEngine.setEngineListener(engineListener);
