@@ -55,6 +55,7 @@ public class StationApplication extends Application {
 
             ResultController controller = loader.getController();
             controller.setApplication(this);
+
             Scene scene = new Scene(startLayout);
             primaryStage.setScene(scene);
             primaryStage.show();

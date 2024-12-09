@@ -1,0 +1,42 @@
+/* styles.css */
+.root {
+    -fx-font-family: "Arial";
+}
+
+.label-title {
+    -fx-font-size: 26px;
+    -fx-text-fill: #333333;
+    -fx-alignment: center;
+}
+
+.label-content {
+    -fx-font-size: 16px;
+    -fx-text-fill: #555555;
+    -fx-padding: 0 0 0 20px;
+}
+
+.tab-pane {
+    -fx-tab-min-width: 100px;
+    -fx-tab-max-width: 200px;
+}
+
+
+.button {
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-color: #3e75a8;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #005bb5;
+}
+
+#quitButton {
+    -fx-background-color: #ac1717;
+}
+
+#quitButton:hover {
+    -fx-background-color: #ac1717;
+}

@@ -1,32 +1,204 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ResultController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ResultController" stylesheets="@styles.css">
     <children>
-        <Label layoutX="208.0" layoutY="20.0" style="-fx-font-size: 24px;" text="Simulation Results" />
-        <VBox layoutX="89.0" layoutY="90.0" prefHeight="213.0" prefWidth="402.0" spacing="10.0">
+        <Label alignment="CENTER" prefHeight="76.0" prefWidth="676.0" text="StationMaster Simulation Results" textAlignment="CENTER" styleClass="label-title">
+            <font>
+                <Font size="26.0" />
+            </font>
+        </Label>
+        <TabPane prefHeight="370.0" prefWidth="664.0" tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane">
+            <tabs>
+                <Tab text="Ticket Check 1">
+                    <content>
+                        <VBox prefHeight="126.0" prefWidth="664.0" styleClass="vbox-background">
+                            <children>
+                                <Label fx:id="totalPassengersServedAtTicket1" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="averageServiceTimeAtTicket1" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Ticket Check 2">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox-background">
+                            <children>
+                                <Label fx:id="totalPassengersServedAtTicket2" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="averageServiceTimeAtTicket2" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Train Station 1">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox-background">
+                            <children>
+                                <Label fx:id="totalPassengersServedAtStation1" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="averageLoadedCapacityAtStation1" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="averageTrainTravelTimeStation1" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="totalTrainAtStation1" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Train Station 2">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox-background">
+                            <children>
+                                <Label fx:id="totalPassengersServedAtStation2" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="averageLoadedCapacityAtStation2" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="averageTrainTravelTimeStation2" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="totalTrainAtStation2" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Metro Station">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox-background">
+                            <children>
+                                <Label fx:id="totalPassengersServedAtMetroStation" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="averageLoadedCapacityAtMetroStation" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="averageTrainTravelTimeMetroStation" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="totalTrainAtMetroStation" prefHeight="40.0" prefWidth="664.0" text="Label" styleClass="label-content">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <HBox alignment="CENTER" prefHeight="74.0" prefWidth="668.0" spacing="20.0">
             <children>
-                <Label fx:id="totalPassengersStation1" text="Total passengers at Train Station 1:" />
-                <Label fx:id="totalServicedStation1" text="Total passengers serviced at Train Station 1:" />
-                <Label fx:id="avgLoadTimeStation1" text="Average station load time at Train Station 1:" />
-                <Label fx:id="totalPassengersStation2" text="Total passengers at Train Station 2:" />
-                <Label fx:id="totalServicedStation2" text="Total passengers serviced at Train Station 2:" />
-                <Label fx:id="avgLoadTimeStation2" text="Average station load time at Train Station 2:" />
-                <Label fx:id="totalPassengersMetro" prefHeight="30.0" prefWidth="235.0" text="Total passengers at Metro Station:" />
-                <Label fx:id="totalServicedMetro" text="Total passengers serviced at Metro Station: " />
-                <Label fx:id="avgLoadTimeMetro" prefHeight="40.0" prefWidth="340.0" text="Average station load time at Metro Station:" />
-            </children>
-        </VBox>
-        <HBox layoutX="208.0" layoutY="353.0" prefHeight="23.0" prefWidth="185.0" spacing="30.0">
-            <children>
-                <Button fx:id="rerunButton" text="Rerun Simulation" />
-                <Button fx:id="quitButton" text="Quit" />
+                <Button fx:id="rerunButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Rerun Simulation" textAlignment="CENTER" styleClass="button" />
+                <Button fx:id="quitButton" mnemonicParsing="false" text="Quit" styleClass="button" />
             </children>
         </HBox>
     </children>
-</AnchorPane>
+</VBox>

@@ -127,16 +127,23 @@ public class MyEngine extends Engine {
     }
 
     public String[] getResultsAsString() {
-        String[] results = new String[9];
-        results[0] = String.valueOf(trainStations[0].getQueueSize());
-        results[1] = String.valueOf(trainStations[0].getCustomerServiced());
-        results[2] = String.valueOf(trainStations[0].getMeanServiceTime());
-        results[3] = String.valueOf(trainStations[1].getQueueSize());
-        results[4] = String.valueOf(trainStations[1].getCustomerServiced());
-        results[5] = String.valueOf(trainStations[1].getMeanServiceTime());
-        results[6] = String.valueOf(trainStations[2].getQueueSize());
-        results[7] = String.valueOf(trainStations[2].getCustomerServiced());
-        results[8] = String.valueOf(trainStations[2].getMeanServiceTime());
+        String[] results = new String[16];
+        results[0] = String.valueOf(servicePoints[0].getCustomerServiced());
+        results[1] = String.format("%.2f", servicePoints[0].getMeanServiceTime());
+        results[2] = String.valueOf(servicePoints[1].getCustomerServiced());
+        results[3] = String.format("%.2f", servicePoints[1].getMeanServiceTime());
+        results[4] = String.valueOf(trainStations[0].getCustomerServiced());
+        results[5] = String.format("%.2f", trainStations[0].getMeanLoadedCapacity());
+        results[6] = String.format("%.2f", trainStations[0].getMeanTravelTime());
+        results[7] = String.valueOf(trainStations[0].getTotalTrains());
+        results[8] = String.valueOf(trainStations[1].getCustomerServiced());
+        results[9] = String.format("%.2f", trainStations[1].getMeanLoadedCapacity());
+        results[10] = String.format("%.2f", trainStations[1].getMeanTravelTime());
+        results[11] = String.valueOf(trainStations[1].getTotalTrains());
+        results[12] = String.valueOf(trainStations[2].getCustomerServiced());
+        results[13] = String.format("%.2f", trainStations[2].getMeanLoadedCapacity());
+        results[14] = String.format("%.2f", trainStations[2].getMeanTravelTime());
+        results[15] = String.valueOf(trainStations[2].getTotalTrains());
         return results;
     }
 
