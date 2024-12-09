@@ -53,16 +53,13 @@ public class StartController extends Controller {
             simulationData[5] = getTotalTime(null,null,minuteLoaderTimeField1,secondLoaderTimeField1);
             simulationData[6] = getTotalTime(null,null,minuteLoaderTimeField2,secondLoaderTimeField2);
             simulationData[7] = getTotalTime(null,null,minuteLoaderTimeField3,secondLoaderTimeField3);
-            simulationData[8] = Long.parseLong(averageTrainCapacityField1.getText());
-            simulationData[9] = Long.parseLong(variabilityTrainCapacityField1.getText());
-            simulationData[10] = Long.parseLong(averageTrainCapacityField2.getText());
-            simulationData[11] = Long.parseLong(variabilityTrainCapacityField2.getText());
-            simulationData[12] = Long.parseLong(averageTrainCapacityField3.getText());
-            simulationData[13] = Long.parseLong(generationMean1.getText());
-            simulationData[14] = Long.parseLong(generationMean2.getText());
-            for(int i = 0; i < 15; ++i){
-                System.out.println(simulationData[i]);
-            }
+            simulationData[8] = parseLongWithDefault(averageTrainCapacityField1.getText());
+            simulationData[9] = parseLongWithDefault(variabilityTrainCapacityField1.getText());
+            simulationData[10] = parseLongWithDefault(averageTrainCapacityField2.getText());
+            simulationData[11] = parseLongWithDefault(variabilityTrainCapacityField2.getText());
+            simulationData[12] = parseLongWithDefault(averageTrainCapacityField3.getText());
+            simulationData[13] = parseLongWithDefault(generationMean1.getText());
+            simulationData[14] = parseLongWithDefault(generationMean2.getText());
             SimulationController.setSimulationData(simulationData);
             application.showSimulationView();
         });
@@ -151,5 +148,12 @@ public class StartController extends Controller {
         if(seedField.getText().isEmpty()) return System.currentTimeMillis() % Integer.MAX_VALUE;
         long seed = Long.parseLong(seedField.getText());
         return seed % Integer.MAX_VALUE;
+    }
+    private long parseLongWithDefault(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            return 0;
+        } else {
+            return Long.parseLong(text);
+        }
     }
 }
