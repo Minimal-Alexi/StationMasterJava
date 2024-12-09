@@ -171,10 +171,10 @@
                            <Label text="Hours:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            <Label text="Minutes:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                            <Label text="Seconds:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                           <TextField fx:id="trainDayField11" promptText="Days" GridPane.rowIndex="2" />
-                           <TextField fx:id="trainHourField11" promptText="Hours (below 24)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                           <TextField fx:id="trainMinuteField11" promptText="Minutes (Below 60)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                           <TextField fx:id="trainSecondField11" promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainDayField2" promptText="Days" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainHourField2" promptText="Hours (below 24)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainMinuteField2" promptText="Minutes (Below 60)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainSecondField2" promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         </children>
                      </GridPane>
                      <GridPane hgap="10.0" layoutX="8.0" layoutY="104.0" prefHeight="90.0" prefWidth="439.0">
@@ -195,8 +195,8 @@
                            </Label>
                            <Label text="Minutes:" GridPane.rowIndex="1" />
                            <Label text="Seconds:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                           <TextField fx:id="minuteLoaderTimeField11" promptText="Minutes (Below 60)" GridPane.rowIndex="2" />
-                           <TextField fx:id="secondLoaderTimeField11" promptText="Seconds (Below 60)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           <TextField fx:id="minuteLoaderTimeField2" promptText="Minutes (Below 60)" GridPane.rowIndex="2" />
+                           <TextField fx:id="secondLoaderTimeField2" promptText="Seconds (Below 60)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         </children>
                      </GridPane>
                      <GridPane hgap="10.0" layoutX="8.0" layoutY="194.0" prefHeight="90.0" prefWidth="439.0">
@@ -217,8 +217,8 @@
                            </Label>
                            <Label text="Average:" GridPane.rowIndex="1" />
                            <Label text="Variability" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                           <TextField fx:id="averageTrainCapacityField11" promptText="Average Train Capacity:" GridPane.rowIndex="2" />
-                           <TextField fx:id="variabilityTrainCapacityField11" promptText="Variance in Train Capacity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           <TextField fx:id="averageTrainCapacityField2" promptText="Average Train Capacity:" GridPane.rowIndex="2" />
+                           <TextField fx:id="variabilityTrainCapacityField2" promptText="Variance in Train Capacity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         </children>
                      </GridPane>
                   </children>
@@ -254,10 +254,10 @@
                            <Label text="Hours:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            <Label text="Minutes:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                            <Label text="Seconds:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                           <TextField fx:id="trainDayField111" promptText="Days" GridPane.rowIndex="2" />
-                           <TextField fx:id="trainHourField111" promptText="Hours (below 24)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                           <TextField fx:id="trainMinuteField111" promptText="Minutes (Below 60)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                           <TextField fx:id="trainSecondField111" promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainDayField3" promptText="Days" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainHourField3" promptText="Hours (below 24)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainMinuteField3" promptText="Minutes (Below 60)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           <TextField fx:id="trainSecondField3" promptText="Seconds (Below 60)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         </children>
                      </GridPane>
                      <GridPane hgap="10.0" layoutX="8.0" layoutY="104.0" prefHeight="90.0" prefWidth="439.0">
@@ -278,8 +278,8 @@
                            </Label>
                            <Label text="Minutes:" GridPane.rowIndex="1" />
                            <Label text="Seconds:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                           <TextField fx:id="minuteLoaderTimeField111" promptText="Minutes (Below 60)" GridPane.rowIndex="2" />
-                           <TextField fx:id="secondLoaderTimeField111" promptText="Seconds (Below 60)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           <TextField fx:id="minuteLoaderTimeField3" promptText="Minutes (Below 60)" GridPane.rowIndex="2" />
+                           <TextField fx:id="secondLoaderTimeField3" promptText="Seconds (Below 60)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         </children>
                      </GridPane>
                      <GridPane hgap="10.0" layoutX="8.0" layoutY="194.0" prefHeight="90.0" prefWidth="439.0">
@@ -300,8 +300,8 @@
                            </Label>
                            <Label text="Average:" GridPane.rowIndex="1" />
                            <Label text="Variability" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                           <TextField fx:id="averageTrainCapacityField111" promptText="Average Train Capacity:" GridPane.rowIndex="2" />
-                           <TextField fx:id="variabilityTrainCapacityField111" promptText="Variance in Train Capacity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           <TextField fx:id="averageTrainCapacityField3" promptText="Average Train Capacity:" GridPane.rowIndex="2" />
+                           <TextField fx:id="variabilityTrainCapacityField3" promptText="Variance in Train Capacity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         </children>
                      </GridPane>
                   </children>
