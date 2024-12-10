@@ -62,6 +62,7 @@ public class MyEngine extends Engine {
         arrivalProcesses[3] = new ArrivalProcess(new Normal(1500, 600), eventList, EventType.B9_TRAIN2_ARRIVAL);
         arrivalProcesses[4] = new ArrivalProcess(new Normal(540, 90), eventList, EventType.B10_TRAIN3_ARRIVAL);
         Passenger.setTrainMetroRatio((double) defaultValues[12] / 100);
+        Clock.getInstance().setTime(0);
         csvWriter = new CSVWriter();
     }
     public MyEngine(long[] simulationSettings) {
@@ -86,6 +87,7 @@ public class MyEngine extends Engine {
         arrivalProcesses[3] = new ArrivalProcess(new Normal(simulationSettings[3], 600,seed), eventList, EventType.B9_TRAIN2_ARRIVAL);
         arrivalProcesses[4] = new ArrivalProcess(new Normal(simulationSettings[4], 90,seed), eventList, EventType.B10_TRAIN3_ARRIVAL);
         Passenger.setTrainMetroRatio((double) simulationSettings[16] / 100);
+        Clock.getInstance().setTime(0);
         csvWriter = new CSVWriter(seed);
     }
 

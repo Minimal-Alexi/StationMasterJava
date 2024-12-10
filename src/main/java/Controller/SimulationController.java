@@ -44,7 +44,6 @@ public class SimulationController extends Controller {
     public void initialize() {
         // Creating listener
         engineListener = new EngineListener(this);
-
         // Creating engine
         // simulationData[1] == Seed, simulationData[0] = Time
         myEngine = new MyEngine(simulationData);
