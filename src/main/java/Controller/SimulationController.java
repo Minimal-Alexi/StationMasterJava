@@ -14,6 +14,10 @@ import javafx.application.Platform;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class SimulationController extends Controller {
     @FXML
     private Slider speedSlider;
@@ -106,23 +110,12 @@ public class SimulationController extends Controller {
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
             try {
-                // Perform long-running operations
-                myEngine = new MyEngine(simulationData[1]);
-                myEngine.setSimulationTime(simulationData[0]);
                 myEngine.run();
-
                 simulationResults = myEngine.getResultsAsString();
-
-                // Once the operation is complete, update the UI on the JavaFX Application Thread
-                ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-                scheduler.schedule(() -> {
-                    // Update the UI after the delay
-                    Platform.runLater(() -> {
-                        ResultController.setResults(simulationResults);
-                        application.showResultView();
-                    });
-                    scheduler.shutdown();
-                }, 5, TimeUnit.SECONDS);
+                Platform.runLater(()->{
+                    ResultController.setResults(simulationResults);
+                    application.showResultView();
+                });
             } catch (Exception e) {
                 Platform.runLater(() -> {
                     application.alertSystem(e);
