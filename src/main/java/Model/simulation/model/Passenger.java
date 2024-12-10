@@ -5,7 +5,7 @@ import Model.simulation.framework.Clock;
 
 public class Passenger {
     private static int nr = 0;
-    private static final double TRAIN_METRO_RATIO = 0.3;
+    private static double TRAIN_METRO_RATIO = 0.3;
     private static Bernoulli bernoulli = new Bernoulli(TRAIN_METRO_RATIO);
     private final int id;
     private final PassengerType type;
@@ -32,6 +32,9 @@ public class Passenger {
     }
     public long getStationTime(){
         return this.departureTime-this.arrivalTime;
+    }
+    public static void setTrainMetroRatio(double trainMetroRatio){
+        Passenger.TRAIN_METRO_RATIO = trainMetroRatio;
     }
     public static void main(String[] args){
         int metro = 0,train = 0;
