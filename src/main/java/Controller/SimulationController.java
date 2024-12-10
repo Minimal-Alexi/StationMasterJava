@@ -25,6 +25,7 @@ public class SimulationController extends Controller {
     private static boolean isTrainLoading;
     private int speed;
     private static long[] simulationData;
+    private static String[] simulationResults;
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)",
     speedFormat = "Speed: %.2f x";
@@ -105,10 +106,23 @@ public class SimulationController extends Controller {
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
             try {
+                // Perform long-running operations
+                myEngine = new MyEngine(simulationData[1]);
+                myEngine.setSimulationTime(simulationData[0]);
                 myEngine.run();
-                Platform.runLater(() -> {
-                   application.showResultView();
-                });
+
+                simulationResults = myEngine.getResultsAsString();
+
+                // Once the operation is complete, update the UI on the JavaFX Application Thread
+                ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+                scheduler.schedule(() -> {
+                    // Update the UI after the delay
+                    Platform.runLater(() -> {
+                        ResultController.setResults(simulationResults);
+                        application.showResultView();
+                    });
+                    scheduler.shutdown();
+                }, 5, TimeUnit.SECONDS);
             } catch (Exception e) {
                 Platform.runLater(() -> {
                     application.alertSystem(e);

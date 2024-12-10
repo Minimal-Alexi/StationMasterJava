@@ -22,6 +22,7 @@ public class TrainStation extends ServicePoint{
     private long totalTrainTravelTime;
     private long lastDepartureTime;
     private final ContinuousGenerator trainCapacityGenerator;
+
     public TrainStation(String name, ContinuousGenerator stationWaitTime, ContinuousGenerator trainCapacity, EventList tl, EventType departureType) {
         super(name,stationWaitTime,tl,departureType);
         this.trainCapacityGenerator = trainCapacity;
