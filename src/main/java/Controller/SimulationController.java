@@ -14,10 +14,6 @@ import javafx.application.Platform;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 public class SimulationController extends Controller {
     @FXML
     private Slider speedSlider;
