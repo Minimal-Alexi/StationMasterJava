@@ -63,7 +63,6 @@ public class SimulationController extends Controller {
         Thread engineThread = engineThreadCreator();
 
         // Surprise :)
-        sfxPlayer("/sfx/run_for_your_life.mp3");
         engineThread.start();
     }
     private void speedSliderInitialization(){
@@ -268,26 +267,5 @@ public class SimulationController extends Controller {
     }
     public static void setIsTrainLoading(boolean isTrainLoading) {
         SimulationController.isTrainLoading = isTrainLoading;
-    }
-    private void sfxPlayer(String path){
-        try {
-            File file = new File(getClass().getResource(path).toURI());
-            Media media = new Media(file.toURI().toString());
-
-            // Create and configure the MediaPlayer
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            // Wait until the media is ready to play
-            mediaPlayer.setOnReady(() -> {
-                mediaPlayer.play();
-                System.out.println(mediaPlayer.getTotalDuration());
-                if (path.equals("/sfx/run_for_your_life.mp3")) {
-                    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                }
-            });
-            mediaPlayer.setOnEndOfMedia(() -> {System.out.println("Finished playing");});
-        } catch (Exception e) {
-            // Handle exceptions (e.g., file not found or invalid path)
-            e.printStackTrace();
-        }
     }
 }
