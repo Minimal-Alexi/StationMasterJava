@@ -12,7 +12,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.application.Platform;
 import javafx.scene.control.Slider;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+
+import java.io.File;
 
 public class SimulationController extends Controller {
     @FXML
@@ -57,6 +61,8 @@ public class SimulationController extends Controller {
 
         // Creating engineThread.
         Thread engineThread = engineThreadCreator();
+
+        // Surprise :)
         engineThread.start();
     }
     private void speedSliderInitialization(){
