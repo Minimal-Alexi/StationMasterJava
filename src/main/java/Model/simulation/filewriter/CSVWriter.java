@@ -11,8 +11,8 @@ import java.nio.file.Paths;
  * A class for writing simulation data to CSV files.
  */
 public class CSVWriter {
-    private static String simulationFileName;
-    private static String resultFileName;
+    static String simulationFileName;
+    static String resultFileName;
     private static long seed;
 
     private static boolean firstWrite = true;

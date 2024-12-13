@@ -23,15 +23,17 @@ import java.io.File;
  */
 public class SimulationController extends Controller {
     @FXML
-    private Slider speedSlider;
+    Slider speedSlider;
     @FXML
-    private Canvas simulationCanvas;
+    Canvas simulationCanvas;
     @FXML
-    private Label timeLabel,speedLabel;
+    Label timeLabel;
+    @FXML
+    Label speedLabel;
 
-    private static boolean isTrainLoading;
+    static boolean isTrainLoading;
     private int speed;
-    private static long[] simulationData;
+    static long[] simulationData;
     private static String[] simulationResults;
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)",
@@ -281,7 +283,7 @@ public class SimulationController extends Controller {
      * The time is formatted in the format "Days - Hours - Minutes - Seconds".
      * @param time the time to be set
      */
-    private void setTimeLabel(long time){
+    void setTimeLabel(long time){
         long days = time / 86400, hours = (time % 86400) / 3600, minutes = (time % 3600) / 60, seconds = time % 60;
         timeLabel.setText(String.format(timeFormat,days,hours,minutes,seconds));
     }

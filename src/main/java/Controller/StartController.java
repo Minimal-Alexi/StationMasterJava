@@ -317,7 +317,7 @@ public class StartController extends Controller {
      * @param secondField the second field
      * @return the total time
      */
-    private long getTotalTime(TextField dayField, TextField hourField, TextField minuteField, TextField secondField) {
+    long getTotalTime(TextField dayField, TextField hourField, TextField minuteField, TextField secondField) {
         long total = 0;
         if(dayField != null && !dayField.getText().isEmpty()){
             total += (long) Integer.parseInt(dayField.getText()) * 24 * 60 * 60;
@@ -342,7 +342,7 @@ public class StartController extends Controller {
      *
      * @return the seed
      */
-    private long getSeed(){
+    long getSeed(){
         // I'm so fucking smart. The Eduni seed is actually an int (32 bits) even though it takes a long.
         // This means we need to take the remainder that fits inside the Integer.
         if(seedField.getText().isEmpty()) return System.currentTimeMillis() % Integer.MAX_VALUE;
