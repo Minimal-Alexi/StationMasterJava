@@ -1,0 +1,7 @@
+;Queue Size;Served;Service Time;
+Ticket Check 1;33;1015;9.52
+Ticket Check 2;45;1049;9.53
+Station;Passengers At Station;Served;Average Station Load Time;Stopped;Average Capacity;Average Train Travel Time;Average Loaded Capacity
+Train Station 1;8;222;122.60;5;71.60;1803.80;44.40
+Train Station 2;8;369;124.50;6;84.00;1515.33;61.50
+Metro Station;47;1410;61.25;16;101.50;543.50;88.13
