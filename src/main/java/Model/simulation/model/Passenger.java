@@ -3,6 +3,10 @@ package Model.simulation.model;
 import Model.distributions.Bernoulli;
 import Model.simulation.framework.Clock;
 
+/**
+ * Represents a passenger in the simulation.
+ * Each passenger has a unique ID, type (Train or Metro), arrival time, and departure time.
+ */
 public class Passenger {
     private static int nr = 0;
     private static double TRAIN_METRO_RATIO = 0.3;
@@ -11,39 +15,77 @@ public class Passenger {
     private final PassengerType type;
     private long arrivalTime;
     private long departureTime;
+
+    /**
+     * Constructs a Passenger with a unique ID and sets the arrival time.
+     * The type of the passenger (Train or Metro) is determined based on a Bernoulli distribution.
+     */
     public Passenger() {
         this.id = nr++;
         this.arrivalTime = Clock.getInstance().getTime();
-        if(bernoulli.sample() == 1){
+        if (bernoulli.sample() == 1) {
             this.type = PassengerType.Train;
-        }
-        else{
+        } else {
             this.type = PassengerType.Metro;
         }
     }
+
+    /**
+     * Sets the departure time of the passenger.
+     */
     public void setDepartureTime() {
         this.departureTime = Clock.getInstance().getTime();
     }
-    public int getId(){
+
+    /**
+     * Returns the ID of the passenger.
+     *
+     * @return the ID of the passenger
+     */
+    public int getId() {
         return this.id;
     }
-    public PassengerType getType(){
+
+    /**
+     * Returns the type of the passenger (Train or Metro).
+     *
+     * @return the type of the passenger
+     */
+    public PassengerType getType() {
         return this.type;
     }
-    public long getStationTime(){
-        return this.departureTime-this.arrivalTime;
+
+    /**
+     * Returns the time the passenger spent at the station.
+     *
+     * @return the time the passenger spent at the station
+     */
+    public long getStationTime() {
+        return this.departureTime - this.arrivalTime;
     }
-    public static void setTrainMetroRatio(double trainMetroRatio){
+
+    /**
+     * Sets the train-to-metro ratio for determining the type of passengers.
+     *
+     * @param trainMetroRatio the train-to-metro ratio
+     */
+    public static void setTrainMetroRatio(double trainMetroRatio) {
         Passenger.TRAIN_METRO_RATIO = trainMetroRatio;
     }
-    public static void main(String[] args){
-        int metro = 0,train = 0;
-        for(int i=0; i<100;++i){
+
+    /**
+     * Main method for testing the Passenger class.
+     * Generates 100 passengers and prints the number of Train and Metro passengers.
+     *
+     * @param args command line arguments
+     */
+    public static void main(String[] args) {
+        int metro = 0, train = 0;
+        for (int i = 0; i < 100; ++i) {
             Passenger passenger = new Passenger();
-            if(passenger.getType() == PassengerType.Train){
+            if (passenger.getType() == PassengerType.Train) {
                 train++;
-            }
-            else if(passenger.getType() == PassengerType.Metro){
+            } else if (passenger.getType() == PassengerType.Metro) {
                 metro++;
             }
         }

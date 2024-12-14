@@ -7,6 +7,9 @@ import Model.simulation.framework.EventList;
 
 import java.util.LinkedList;
 
+/**
+ * Represents a service point in the simulation where passengers are serviced.
+ */
 public class ServicePoint {
     protected static final String GREEN = "\033[0;32m";
     protected static final String WHITE = "\033[0;37m";
@@ -19,6 +22,14 @@ public class ServicePoint {
     protected int customerServiced;
     protected boolean reserved = false;
 
+    /**
+     * Constructs a ServicePoint with the specified name, generator, event list, and event type.
+     *
+     * @param name the name of the service point
+     * @param g the continuous generator for service times
+     * @param tl the event list
+     * @param type the event type scheduled after service
+     */
     public ServicePoint(String name, ContinuousGenerator g, EventList tl, EventType type) {
         this.name = name;
         this.generator = g;
@@ -26,14 +37,24 @@ public class ServicePoint {
         this.eventTypeScheduled = type;
         this.serviceTimeSum = 0;
         this.customerServiced = 0;
-
         queue = new LinkedList<>();
     }
 
+    /**
+     * Adds a passenger to the queue.
+     *
+     * @param a the passenger to add
+     */
     public void addToQueue(Passenger a) {
         queue.addFirst(a);
     }
 
+    /**
+     * Removes and returns a passenger from the queue.
+     * Increments the number of customers serviced and sets reserved to false.
+     *
+     * @return the removed passenger, or null if the queue is empty
+     */
     public Passenger removeFromQueue() {
         if (queue.size() > 0) {
             Passenger a = queue.removeLast();
@@ -44,6 +65,10 @@ public class ServicePoint {
             return null;
     }
 
+    /**
+     * Begins servicing the next passenger in the queue.
+     * Schedules the next event based on the service time.
+     */
     public void beginService() {
         System.out.printf("%sStarting service %s for the customer #%d%s\n", GREEN, name, queue.peek().getId(), WHITE);
 
@@ -53,35 +78,58 @@ public class ServicePoint {
         eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getTime() + serviceTime));
     }
 
+    /**
+     * Returns whether the service point is reserved.
+     *
+     * @return true if the service point is reserved, false otherwise
+     */
     public boolean isReserved() {
         return reserved;
     }
 
+    /**
+     * Returns whether there are passengers in the queue.
+     *
+     * @return true if there are passengers in the queue, false otherwise
+     */
     public boolean isOnQueue() {
         return queue.size() > 0;
     }
+
+    /**
+     * Returns the size of the queue.
+     *
+     * @return the size of the queue
+     */
     public int getQueueSize() {
         return queue.size();
     }
 
+    /**
+     * Returns the name of the service point.
+     *
+     * @return the name of the service point
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the number of customers serviced.
+     *
+     * @return the number of customers serviced
+     */
     public int getCustomerServiced() {
         return customerServiced;
     }
 
+    /**
+     * Returns the mean service time.
+     *
+     * @return the mean service time, or -1 if no customers have been serviced
+     */
     public double getMeanServiceTime() {
-        if(customerServiced == 0) return -1;
+        if (customerServiced == 0) return -1;
         return serviceTimeSum / customerServiced;
     }
-
-//    public double getTotalQueueTime() {
-//        double totalQueueTime = 0;
-//        for (Passenger passenger : queue) {
-//            totalQueueTime += Clock.getInstance().getClock() - passenger.getArrivalTime();
-//        }
-//        return totalQueueTime;
-//    }
 }

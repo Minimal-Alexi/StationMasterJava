@@ -18,17 +18,22 @@ import javafx.scene.paint.Color;
 
 import java.io.File;
 
+/**
+ * The type Simulation controller.
+ */
 public class SimulationController extends Controller {
     @FXML
-    private Slider speedSlider;
+    Slider speedSlider;
     @FXML
-    private Canvas simulationCanvas;
+    Canvas simulationCanvas;
     @FXML
-    private Label timeLabel,speedLabel;
+    Label timeLabel;
+    @FXML
+    Label speedLabel;
 
-    private static boolean isTrainLoading;
+    static boolean isTrainLoading;
     private int speed;
-    private static long[] simulationData;
+    static long[] simulationData;
     private static String[] simulationResults;
     private static final Color backgroundColor = Color.CADETBLUE;
     private static final String timeFormat = "%03d Days - %02d Hours - %02d Minutes - %02d Seconds", standardName = "%s (%d)", stationNameTrain = "%s (%d / %d)",
@@ -41,6 +46,9 @@ public class SimulationController extends Controller {
     private TrainStationVisualization[] trainStationVisualization;
     private GraphicsContext simulationCtx;
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         // Creating listener
         engineListener = new EngineListener(this);
@@ -65,6 +73,12 @@ public class SimulationController extends Controller {
         // Surprise :)
         engineThread.start();
     }
+
+    /**
+     * Initializes the speed slider with a minimum value of 100, a maximum value of 1999, and a default value of 1000.
+     * Sets up a listener to update the speed value and corresponding label whenever the slider value changes.
+     * Also updates the speed of the engine and the current speed of the train station visualization.
+     */
     private void speedSliderInitialization(){
         speedSlider.setMin(100);
         speedSlider.setMax(1999);
@@ -78,6 +92,11 @@ public class SimulationController extends Controller {
             TrainStationVisualization.setCurrentSpeed(speed);
         });
     }
+
+    /**
+     * Initializes the canvas by setting the background color, drawing the curve connecting the service points and train stations,
+     * and initializing the service point and train station visualizations.
+     */
     private void canvasInitializer() {
         //simulationCtx init
         simulationCtx = simulationCanvas.getGraphicsContext2D();
@@ -108,6 +127,14 @@ public class SimulationController extends Controller {
         //testDisplayServicePoints();
         //testTrainStationDisplay();
     }
+
+    /**
+     * Creates a new thread that runs the engine and updates the simulation results.
+     * The thread is set as a daemon thread to ensure that it is terminated when the main thread is terminated.
+     * The thread also updates the simulation results in the ResultController and shows the result view.
+     * If an exception occurs, an alert is shown to the user.
+     * @return the thread that runs the engine and updates the simulation results
+     */
     private Thread engineThreadCreator(){
         Thread engineThread = new Thread(() -> {
             try {
@@ -126,6 +153,14 @@ public class SimulationController extends Controller {
         engineThread.setDaemon(true);
         return engineThread;
     }
+
+    /**
+     * Refreshes the map state by updating the visualization of the service points and train stations.
+     * If the train is loading, the method returns without updating the map state.
+     * The background color is set to the canvas, and the canvas is cleared.
+     * The curve connecting the service points and train stations is drawn.
+     * The visualization of the service points and train stations are updated.
+     */
     private void mapStateRefresher(){
         visualizationStateUpdater(servicePoints,trainStations);
         if(isTrainLoading){
@@ -137,11 +172,26 @@ public class SimulationController extends Controller {
         visualizationDrawer(servicePointVisualization);
         visualizationDrawer(trainStationVisualization);
     }
+
+    /**
+     * Draws the visualization of the service points and train stations.
+     * @param visualization the visualization to be drawn
+     */
     private void visualizationDrawer(AbstractVisualization[] visualization){
         for(int i=0; i<visualization.length; ++i){
             visualization[i].drawVisualization();
         }
     }
+
+    /**
+     * Updates the visualization state by updating the service points and train stations.
+     * The display name of the service points and train stations are updated.
+     * If the train station is reserved, the display name is updated to include the current capacity of the train station.
+     * If the train station is reserved and the train has arrived, the train station is updated to load passengers.
+     * The visualization of the service points and train stations are updated.
+     * @param servicePoints the service points to be updated
+     * @param trainStations the train stations to be updated
+     */
     private void visualizationStateUpdater(ServicePoint[] servicePoints, TrainStation[] trainStations){
         for(int i=0; i<servicePoints.length; ++i){
             String displayName = String.format(standardName,servicePoints[i].getName(),servicePoints[i].getQueueSize());
@@ -169,6 +219,13 @@ public class SimulationController extends Controller {
             trainStationVisualization[i].setPassengerCount(trainStations[i].getQueueSize());
         }
     }
+
+    /**
+     * Initializes the display name of the service points and train stations.
+     * If the train station is reserved, the display name is updated to include the current capacity of the train station.
+     * @param visualization the visualization to be initialized
+     * @param servicePoints the service points to be initialized
+     */
     private void visualizationNameInitializer(AbstractVisualization[] visualization, ServicePoint[] servicePoints){
         for(int i = 0; i < visualization.length; ++i){
             String serviceName = servicePoints[i].getName(), displayName;
@@ -182,6 +239,10 @@ public class SimulationController extends Controller {
             visualization[i].setName(displayName);
         }
     }
+
+    /**
+     * Draws the curve connecting the service points and train stations.
+     */
     private void curveDrawer(){
         simulationCtx.setStroke(Color.BLACK);
         simulationCtx.setLineWidth(2);
@@ -216,11 +277,23 @@ public class SimulationController extends Controller {
             }
         }
     }
-    private void setTimeLabel(long time){
+
+    /**
+     * Sets the time label to the given time.
+     * The time is formatted in the format "Days - Hours - Minutes - Seconds".
+     * @param time the time to be set
+     */
+    void setTimeLabel(long time){
         long days = time / 86400, hours = (time % 86400) / 3600, minutes = (time % 3600) / 60, seconds = time % 60;
         timeLabel.setText(String.format(timeFormat,days,hours,minutes,seconds));
     }
- /*
+
+    /**
+     * Sets simulation data.
+     *
+     * @param simulationData the simulation data
+     */
+/*
     private void testDisplayPassengers(){
         for(int i=0; i<10; ++i){
             PassengerVisualization passengerVisualization = new PassengerVisualization(i * PassengerVisualization.xSize,0,simulationCtx);
@@ -243,28 +316,68 @@ public class SimulationController extends Controller {
         }
     }
     */
+
+    /**
+     * Gets simulation data.
+     *
+     * @return the simulation data
+     */
     public static void setSimulationData(long[] simulationData) {
         SimulationController.simulationData = simulationData;
     }
+
+    /**
+     * Gets background color.
+     *
+     * @return the background color
+     */
     public static Color getBackgroundColor() {
         return backgroundColor;
     }
+
+    /**
+     * On time update.
+     *
+     * @param time the time
+     */
     public void onTimeUpdate(long time){
         Platform.runLater(()->{
             setTimeLabel(time);
         });
     }
+
+    /**
+     * On update.
+     */
     public void onUpdate(){
         Platform.runLater(()->{
             mapStateRefresher();
         });
     }
+
+    /**
+     * Sets service points.
+     *
+     * @param servicePoints the service points
+     */
     public void setServicePoints(ServicePoint[] servicePoints) {
         this.servicePoints = servicePoints;
     }
+
+    /**
+     * Sets train stations.
+     *
+     * @param trainStations the train stations
+     */
     public void setTrainStations(TrainStation[] trainStations) {
         this.trainStations = trainStations;
     }
+
+    /**
+     * Sets is train loading.
+     *
+     * @param isTrainLoading the is train loading
+     */
     public static void setIsTrainLoading(boolean isTrainLoading) {
         SimulationController.isTrainLoading = isTrainLoading;
     }

@@ -16,15 +16,29 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * Main application class for the StationMaster application.
+ * Manages the primary stage and handles view transitions and sound effects.
+ */
 public class StationApplication extends Application {
     private static Stage primaryStage;
     private static MediaPlayer mediaPlayer;
+
+    /**
+     * Starts the application and shows the start view.
+     *
+     * @param stage the primary stage for this application
+     */
     public void start(Stage stage) {
         this.primaryStage = stage;
         primaryStage.setTitle("StationMaster");
         showStartView();
     }
-    public void showStartView(){
+
+    /**
+     * Shows the start view.
+     */
+    public void showStartView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Start.fxml"));
             Parent startLayout = loader.load();
@@ -40,7 +54,11 @@ public class StationApplication extends Application {
             alertSystem(e);
         }
     }
-    public void showSimulationView(){
+
+    /**
+     * Shows the simulation view.
+     */
+    public void showSimulationView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Simulation.fxml"));
             Parent simulationLayout = loader.load();
@@ -58,7 +76,11 @@ public class StationApplication extends Application {
             alertSystem(e);
         }
     }
-    public void showResultView(){
+
+    /**
+     * Shows the result view.
+     */
+    public void showResultView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Result.fxml"));
             Parent startLayout = loader.load();
@@ -74,14 +96,26 @@ public class StationApplication extends Application {
             alertSystem(e);
         }
     }
-    public void alertSystem(Exception e){
+
+    /**
+     * Displays an alert with the given exception message.
+     *
+     * @param e the exception to display
+     */
+    public void alertSystem(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText("Something went wrong.\n" + e.getMessage());
         e.printStackTrace();
         alert.showAndWait();
     }
-    private void sfxPlayer(String path){
+
+    /**
+     * Plays a sound effect from the given path.
+     *
+     * @param path the path to the sound effect file
+     */
+    private void sfxPlayer(String path) {
         try {
             File file = new File(getClass().getResource(path).toURI());
             Media media = new Media(file.toURI().toString());
@@ -98,16 +132,28 @@ public class StationApplication extends Application {
             mediaPlayer.setOnError(() -> {
                 System.err.println("Error with media player: " + mediaPlayer.getError());
             });
-            mediaPlayer.setOnEndOfMedia(() -> {System.out.println("Finished playing");});
+            mediaPlayer.setOnEndOfMedia(() -> {
+                System.out.println("Finished playing");
+            });
         } catch (Exception e) {
             alertSystem(e);
         }
     }
-    private void stopSfxPlayer(){
-        if(mediaPlayer!=null){
+
+    /**
+     * Stops the currently playing sound effect.
+     */
+    private void stopSfxPlayer() {
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
     }
+
+    /**
+     * The main method to launch the application.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }
